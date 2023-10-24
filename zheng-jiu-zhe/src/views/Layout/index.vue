@@ -1,16 +1,15 @@
 <script setup>
-  import {ref} from 'vue'
-
+  // import {ref} from 'vue'
 </script>
 
 <template>
-  <h1>layout</h1>
-
+  <main class="main">
+    
+  </main>
+  <div></div>
 </template>
 
 <style lang="scss" scoped>
-  h1{
-    margin: 0;
-    padding : 0;
-  }
+
+
 </style>
