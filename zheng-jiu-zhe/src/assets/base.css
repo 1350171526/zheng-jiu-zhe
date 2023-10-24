@@ -71,6 +71,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url('./images/bg.jpg');
   background-size: cover;
-  filter: blur(1000px);
+  backdrop-filter: blur(40px);
 }
 
