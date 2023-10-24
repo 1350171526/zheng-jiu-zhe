@@ -20,7 +20,7 @@
 
 
   .common-layout{
-    color: #000;
+    color: #fff;
 
     .header{
       width: 100vw;
