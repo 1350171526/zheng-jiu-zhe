@@ -1,5 +1,4 @@
 <script setup>
-
 </script>
 
 <template>
@@ -17,33 +16,33 @@
     </div>
     <div class="right">
       <div class="item">
-        <div>icon</div>
+        <span class="iconfont icon-yulebao"></span>
         <div>充抖币</div>
         
       </div>
       <div class="item">
         
-        <div>icon</div>
+        <span class="iconfont icon-xiazai"></span>
         <div>客户端</div>
       </div>
       <div class="item">
         
-        <div>icon</div>
+        <span class="iconfont icon-shandian"></span>
         <div>快捷访问</div>
       </div>
       <div class="item">
         
-        <div>icon</div>
+        <span class="iconfont icon-tishi"></span>
         <div>通知</div>
       </div>
       <div class="item">
         
-        <div>icon</div>
+        <span class="iconfont icon-weixin"></span>
         <div>私信</div>
       </div>
       <div class="item">
         
-        <div>icon</div>
+        <span class="iconfont icon-zengjia"></span>
         <div>投稿</div>
       </div>
       <div class="item">
@@ -92,6 +91,7 @@
   .right{
     display: flex;
     .item{
+      color: #b8b6b6;
       font-size: 12px;
       display: flex;
       flex-direction: column;
