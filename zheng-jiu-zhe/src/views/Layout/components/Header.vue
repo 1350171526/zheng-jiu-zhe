@@ -10,7 +10,7 @@
     <div class="middle">
       <input type="text" placeholder="搜索你感兴趣的内容">
       <span>
-        <span>icon</span>
+        <span class="iconfont icon-sousuo"></span>
         <span>搜索</span>
       </span>
     </div>
