@@ -3,6 +3,7 @@
     <div>首页</div>
     <div>热门视频</div>
     <div>体育频道</div>
+    <span class=" iconfont icon-remen"></span>
   </div>
 </template>
 
