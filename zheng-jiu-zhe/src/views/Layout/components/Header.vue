@@ -1,10 +1,5 @@
 <script setup>
-import { ref } from 'vue';
-let screenWidtn = ref()
-screenWidtn.value = window.innerWidth;
-window.addEventListener('resize', function() {
-  screenWidtn.value = window.innerWidth;
-});
+
 </script>
 
 <template>
@@ -23,7 +18,7 @@ window.addEventListener('resize', function() {
     <div class="right">
       <div class="item" >
         <span class="iconfont icon-yulebao"></span>
-        <div>充抖币</div>
+        <div>充牛币</div>
       </div>
       <div class="item" >
         <span class="iconfont icon-xiazai"></span>
@@ -73,12 +68,25 @@ window.addEventListener('resize', function() {
       }
     }
   }
+  @media screen and (max-width: 876px) {
+    .content{
+      .right{
+        .item{
+          &:nth-child(n+4):nth-child(-n+6){
+            display: none;
+            // color: #000;
+          }
+        }
+      }
+    }
+  }
   .content{
     height: 10vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
     .left{
+      cursor: pointer;
       display: flex;
       align-items: center;
       img{
@@ -134,7 +142,6 @@ window.addEventListener('resize', function() {
     display: flex;
 
     .avatar{
-      
       img{
         width: 30px;
         height: 30px;

@@ -40,7 +40,8 @@ const State = ref([
   height: 60px;  
   text-align: center;  
   line-height: 60px;  
-  border-radius: 15px;  
+  border-radius: 15px; 
+  cursor: pointer; 
   &:hover {  
   background-color: rgba(255, 255, 255, 0.2);  
 }  
