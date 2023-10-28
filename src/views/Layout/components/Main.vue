@@ -1,27 +1,19 @@
 <script setup>
- import * as qiniu from 'qiniu-js'
- 
- 
- console.log(qiniu);
-//  const accessKey = 'h6BkfhZ-X2xcGqz-qcy7J5FFoo5zuHr8me1e_Nw1'  
-// const secretKey = 'gzwDa0e4EgwUPVx3FzuvF05mw-kQJv8V6T9WUiBD'  
-// const mac = new qiniu.auth.digest.Mac(accessKey, secretKey) 
-// console.log(mac);
-// const bucket = 'zheng-jiu-zhe'  
-  
-// const qiniuClient = new qiniu.auth.Client({  
-//   accessKey,  
-//   secretKey,  
-// })  
-  
-// // 获取资源列表  
-// qiniuClient.bucketList(bucket, null, function(err, data) {  
-//   if (err) {  
-//     console.error(err)  
-//     return  
-//   }  
-//   console.log(data)  
-// })
+//  import * as qiniu from 'qiniu-js'
+
+import { getVedioApi } from '@/apis/video';
+import { onMounted, ref } from 'vue';
+
+const urlArr = ref()
+const getVedio =async () =>{
+  const res = await getVedioApi()
+  urlArr.value = res.data
+}
+
+onMounted(() => {
+  getVedio()
+})
+
 </script>
 
 <template>
@@ -30,7 +22,7 @@
       <video 
       class="my-vedio"
       playsinline="true"
-      src="http://s30eih4r2.hb-bkt.clouddn.com/League%20of%20Legends%20%28TM%29%20Client%202023-06-18%2017-43-57.mp4?e=1698390018&token=h6BkfhZ-X2xcGqz-qcy7J5FFoo5zuHr8me1e_Nw1:aZ-l2OdmQy7cGXy8gzSmrQIy0EQ=" 
+      :src="urlArr[0]" 
       controls="controls" 
       type="video/mp4"
       loop
@@ -38,6 +30,7 @@
       muted
       controlsList="nodownload  noremoteplayback noplaybackrate" 
       disablePictureInPicture="true"
+      v-if="urlArr"
       ></video>
     </div>
     <div class="right">

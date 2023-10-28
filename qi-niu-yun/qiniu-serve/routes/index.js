@@ -10,7 +10,7 @@ var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
 
 /* GET home page. */
 router.get('/look', function(req, res, next) {
-  // 获取指定路径地址
+  // 获取单个路径地址
   // var config = new qiniu.conf.Config();
   // var bucketManager = new qiniu.rs.BucketManager(mac, config);
   // var privateBucketDomain = 'http://s30eih4r2.hb-bkt.clouddn.com';
@@ -19,7 +19,8 @@ router.get('/look', function(req, res, next) {
   // var privateDownloadUrl = bucketManager.privateDownloadUrl(privateBucketDomain, key, deadline);
   // console.log(privateDownloadUrl);
 
-  // 获取所有
+  // 获取指定前缀路径
+  const vedioArr = [];
   var config = new qiniu.conf.Config();
   //config.useHttpsDomain = true;
   config.zone = qiniu.zone.Zone_z1;
@@ -48,11 +49,12 @@ router.get('/look', function(req, res, next) {
         if(key.length<=6){
           return
         }
-        console.log(key.length);
+        // console.log(key.length);
         var privateBucketDomain = 'http://s30eih4r2.hb-bkt.clouddn.com';
         var deadline = parseInt(Date.now() / 1000) + 3600; // 1小时过期
         var privateDownloadUrl = bucketManager.privateDownloadUrl(privateBucketDomain, key, deadline);
         console.log(privateDownloadUrl);
+        vedioArr.push(privateDownloadUrl)
         // console.log(item.putTime);
         // console.log(item.hash);
         // console.log(item.fsize);
@@ -64,16 +66,14 @@ router.get('/look', function(req, res, next) {
       console.log(respInfo.statusCode);
       console.log(respBody);
     }
+    res.send(vedioArr)
     
   });
 
 
   
-res.end("aaa")
+
   
 });
-// app.listen(3000,function(){     //启动监听端口8080
-//   console.log('正在监听3000端口')      
-// });  
 
 module.exports = router;
