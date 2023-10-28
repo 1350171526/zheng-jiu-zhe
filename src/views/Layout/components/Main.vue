@@ -1,18 +1,24 @@
 <script setup>
-//  import * as qiniu from 'qiniu-js'
+import { ref } from 'vue';
 
-import { getVedioApi } from '@/apis/video';
-import { onMounted, ref } from 'vue';
-
-const urlArr = ref()
-const getVedio =async () =>{
-  const res = await getVedioApi()
-  urlArr.value = res.data
-}
-
-onMounted(() => {
-  getVedio()
+const props = defineProps({
+  urlArr: {
+    type: Array, 
+    default: []
+  },
+  index: {
+    type: Number, 
+    default: 0
+  }
 })
+
+const emit = defineEmits(['nextVedio']['lastVedio'])
+const last = () =>{
+  emit('lastVedio')
+}
+const next = () =>{
+  emit('nextVedio')
+}
 
 </script>
 
@@ -22,7 +28,7 @@ onMounted(() => {
       <video 
       class="my-vedio"
       playsinline="true"
-      :src="urlArr[0]" 
+      :src="props.urlArr[props.index]" 
       controls="controls" 
       type="video/mp4"
       loop
@@ -30,12 +36,12 @@ onMounted(() => {
       muted
       controlsList="nodownload  noremoteplayback noplaybackrate" 
       disablePictureInPicture="true"
-      v-if="urlArr"
+      v-if="props.urlArr"
       ></video>
     </div>
     <div class="right">
-      <span class="iconfont icon-jiantoushang"></span>
-      <span class="iconfont icon-jiantouxia"></span>
+      <span class="iconfont icon-jiantoushang" @click="last()"></span>
+      <span class="iconfont icon-jiantouxia" @click="next()"></span>
 
     </div>
   </div>
@@ -52,6 +58,7 @@ onMounted(() => {
     width: 95%;
     height: 100%;
     border-radius: 20px;
+    border: none;
     background-color: rgba(0, 0, 0, 0.3); 
     video{
       transition: box-shadow 0.3s ease-in-out !important; /* 添加过渡效果 */  
