@@ -27,8 +27,8 @@ router.get('/look', function(req, res, next) {
   var bucketManager = new qiniu.rs.BucketManager(mac, config);
   var bucket = 'zheng-jiu-zhe';
   var options = {
-    limit: 10,
-    prefix: 'viedo/',
+    limit: 40,
+    prefix: '',
   };
   bucketManager.listPrefix(bucket, options, function(err, respBody, respInfo) {
     if (err) {
