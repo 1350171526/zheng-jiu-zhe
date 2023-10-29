@@ -70,6 +70,10 @@ const next = () =>{
       object-fit: contain; 
      
     }
+
+    video:focus { //取消视频边框外部出现白线
+    outline: -webkit-focus-ring-color auto 0px;
+    }
     video::-webkit-media-controls-timeline {
         width: 100%;
         position: absolute;

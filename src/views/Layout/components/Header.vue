@@ -108,6 +108,7 @@
     &:hover{
       border: 2px solid #ffffff;
       span{
+        cursor: pointer;
         background-color: #fff;
         color: #000;
       }

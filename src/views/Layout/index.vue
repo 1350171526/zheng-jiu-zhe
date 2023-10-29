@@ -3,7 +3,7 @@
   import Headers from "./components/Header.vue";
   import Main from "./components/Main.vue";
 
-import { getVedioApi } from '@/apis/video';
+import { getVedioApi,getMusicApi,getHotApi } from '@/apis/video';
 import { onMounted, ref, onBeforeUnmount } from 'vue';
 
 

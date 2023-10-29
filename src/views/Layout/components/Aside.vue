@@ -2,7 +2,7 @@
   <div class="Aside">
     <div v-for="(item,index) in State" 
     :key="item.id"
-     @click="activeindex=index"
+     @click="switchType(item,index)"
      :class="{Color:index===activeindex}"
      >
       <span :class="item.icon" class="icon"></span>
@@ -30,6 +30,19 @@ const activeindex = ref(0)
   {id:10,name:"动漫",icon:'iconfont icon-dongman'},
   {id:11,name:"我的",icon:'iconfont icon-wode'},
 ]) 
+
+const switchType = (item,index) =>{
+  activeindex.value = index
+  if(item.id==1){
+    console.log(1);
+  }
+  if(item.id==2){
+    console.log(2);
+  }
+  if(item.id==3){
+    console.log(3);
+  }
+}
 </script>
 
  <style lang="scss" scoped>
@@ -48,6 +61,7 @@ const activeindex = ref(0)
     justify-content:center;
     align-items:center;
     border-radius: 15px;
+    cursor: pointer;
     &.Color{
   background-color: rgba(255, 255, 255, 0.4);  
   color: #fff;
