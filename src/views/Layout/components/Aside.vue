@@ -85,6 +85,7 @@ const switchType = (item,index) =>{
     .Aside{
       div{
         flex-direction: column;
+        justify-content: center;
       }
     }
   }
