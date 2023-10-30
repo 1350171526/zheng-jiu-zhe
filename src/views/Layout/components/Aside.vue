@@ -55,13 +55,12 @@ const switchType = (item,index) =>{
   height: 100%;
   justify-content:space-around;
   align-items:center;
-  
+  overflow: hidden;
   div{
     height: 60px;
     width: 100%;
     display: flex;
     justify-content:center;
-    align-items:center;
     border-radius: 15px;
     cursor: pointer;
     &.Color{
@@ -69,7 +68,10 @@ const switchType = (item,index) =>{
   color: #fff;
 }  
     span{
+      line-height: 100%;
       padding: 0 10px;
+      display: flex;
+      align-items: center;
     }
   }
  }
