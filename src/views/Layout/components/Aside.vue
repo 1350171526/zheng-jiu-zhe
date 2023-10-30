@@ -61,6 +61,7 @@ const switchType = (item,index) =>{
     width: 100%;
     display: flex;
     justify-content:center;
+    align-items: center;
     border-radius: 15px;
     cursor: pointer;
     &.Color{
