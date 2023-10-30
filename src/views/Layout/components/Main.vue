@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 
 const props = defineProps({
   urlArr: {
@@ -48,6 +47,20 @@ const next = () =>{
 </template>
 
 <style lang="scss" scoped>
+  @media screen and (max-width :375px){
+    .main{
+      .left{
+        width: 100% !important;
+        height: 100vh - 6vh  !important;
+      }
+      .right{
+        display: none;
+      }
+    }
+    
+    
+}
+
 .main{
   width: 100%;
   height: 100%;
@@ -60,15 +73,18 @@ const next = () =>{
     border-radius: 20px;
     border: none;
     background-color: rgba(0, 0, 0, 0.3); 
+    overflow: hidden;
+
     video{
-      transition: box-shadow 0.3s ease-in-out !important; /* 添加过渡效果 */  
-      box-shadow: none !important;  
       position: absolute;
       width: 100%;  
       height: 100%;  
       z-index: 99;
       object-fit: contain; 
-     
+    }
+
+    video:focus { //取消视频边框外部出现白线
+    outline: -webkit-focus-ring-color auto 0px;
     }
     video::-webkit-media-controls-timeline {
         width: 100%;

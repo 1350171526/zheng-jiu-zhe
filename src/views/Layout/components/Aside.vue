@@ -2,7 +2,7 @@
   <div class="Aside">
     <div v-for="(item,index) in State" 
     :key="item.id"
-     @click="activeindex=index"
+     @click="switchType(item,index)"
      :class="{Color:index===activeindex}"
      >
       <span :class="item.icon" class="icon"></span>
@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref,defineEmits  } from "vue"
 const activeindex = ref(0)
  const State = ref([
   {id:1,name:'首页',icon:'iconfont icon-shouye'},
@@ -30,31 +30,56 @@ const activeindex = ref(0)
   {id:10,name:"动漫",icon:'iconfont icon-dongman'},
   {id:11,name:"我的",icon:'iconfont icon-wode'},
 ]) 
+
+const emit = defineEmits(['getVedio','getMusic','getHot'])
+const switchType = (item,index) =>{
+  activeindex.value = index
+  if(item.id==1){
+    emit('getVedio')
+  }
+  if(item.id==2){
+    emit('getMusic')
+  }
+  if(item.id==3){
+    emit('getHot')
+  }
+}
 </script>
 
  <style lang="scss" scoped>
  .Aside{
+  padding: 30px 0;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  justify-content:center;
+  justify-content:space-around;
   align-items:center;
-  
+  overflow: hidden;
   div{
+    width: 8vw;
+    margin-left: 10px;
+    white-space: nowrap;
     height: 60px;
-    width: 100%;
     display: flex;
     justify-content:center;
-    align-items:center;
+    align-items: center;
     border-radius: 15px;
+    cursor: pointer;
+    
     &.Color{
-  background-color: rgba(255, 255, 255, 0.4);  
-  color: #fff;
-}  
+      background-color: rgba(255, 255, 255, 0.4);  
+    }  
+    &:hover{
+      background-color: rgba(255, 255, 255, 0.3); 
+    }
     span{
       padding: 0 10px;
+      line-height: 100%;
+      display: flex;
+      align-items: center;
     }
+    
   }
  }
 
@@ -63,12 +88,14 @@ const activeindex = ref(0)
     .Aside{
       div{
         flex-direction: column;
+        justify-content: center;
       }
     }
   }
   @media screen and (max-width :500px){
     .Aside{
       div{
+        width: 7vw;
         flex-direction: column;
         span{
           padding: 0;
@@ -76,6 +103,13 @@ const activeindex = ref(0)
         .name{
           display: none;
         }
+      }
+    }
+  }
+  @media screen and (max-width :375px){
+    .Aside{
+      div{
+        display: none;
       }
     }
   }

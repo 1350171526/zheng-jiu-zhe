@@ -3,7 +3,7 @@
   import Headers from "./components/Header.vue";
   import Main from "./components/Main.vue";
 
-import { getVedioApi } from '@/apis/video';
+import { getVedioApi,getMusicApi,getHotApi } from '@/apis/video';
 import { onMounted, ref, onBeforeUnmount } from 'vue';
 
 
@@ -59,6 +59,16 @@ const lastVedio = () =>{
   }
 }
 
+const getMusic =async () =>{
+  const res = await getMusicApi()
+  urlArr.value = res.data
+}
+const getHot =async () =>{
+  const res = await getHotApi()
+  urlArr.value = res.data
+
+}
+
 
 </script>
 
@@ -67,7 +77,14 @@ const lastVedio = () =>{
     <el-container @keydown.up="lastVedio()" @keydown.down="nextVedio()">
       <el-header class="header"><Headers></Headers></el-header>
       <el-container>
-        <el-aside class="aside"><Aside></Aside></el-aside>
+        <el-aside class="aside">
+          <Aside
+          @getVedio="getVedio"
+          @getMusic="getMusic"
+          @getHot="getHot"
+          >
+          </Aside>
+        </el-aside>
         <el-main>
           <Main 
           :urlArr="urlArr" 
@@ -84,7 +101,19 @@ const lastVedio = () =>{
 </template>
 
 <style lang="scss" scoped>
-
+  @media screen and (max-width :375px){
+    .common-layout{
+      .header{
+        height: 0 !important;
+      }
+      .aside{
+        width: 0 !important;
+      }
+      .el-main{
+        padding: 3vh !important;
+      }
+    }
+  }
 
   .common-layout{
     color: #fff;

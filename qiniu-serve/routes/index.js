@@ -9,7 +9,16 @@ var secretKey = 'gzwDa0e4EgwUPVx3FzuvF05mw-kQJv8V6T9WUiBD';
 var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
 
 /* GET home page. */
-router.get('/look', function(req, res, next) {
+router.get('/total', function(req, res, next) {
+  getLink(res,'')
+});
+router.get('/hot', function(req, res, next) {
+  getLink(res,'hot')
+});
+router.get('/music', function(req, res, next) {
+  getLink(res,'music')
+});
+const getLink = (res,path) =>{
   // 获取单个路径地址
   // var config = new qiniu.conf.Config();
   // var bucketManager = new qiniu.rs.BucketManager(mac, config);
@@ -27,8 +36,8 @@ router.get('/look', function(req, res, next) {
   var bucketManager = new qiniu.rs.BucketManager(mac, config);
   var bucket = 'zheng-jiu-zhe';
   var options = {
-    limit: 40,
-    prefix: '',
+    limit: 80,
+    prefix: path,
   };
   bucketManager.listPrefix(bucket, options, function(err, respBody, respInfo) {
     if (err) {
@@ -46,34 +55,35 @@ router.get('/look', function(req, res, next) {
       items.forEach(function(item) {
         // console.log(item.key);
         var key = item.key
-        if(key.length<=6){
-          return
+        const length = path.length ? path.length+1 : 6
+        if(key.length>length){
+          // console.log(key.length);
+          var privateBucketDomain = 'http://s30eih4r2.hb-bkt.clouddn.com';
+          var deadline = parseInt(Date.now() / 1000) + 3600; // 1小时过期
+          var privateDownloadUrl = bucketManager.privateDownloadUrl(privateBucketDomain, key, deadline);
+          // console.log(privateDownloadUrl);
+          vedioArr.push(privateDownloadUrl)
+          // console.log(item.putTime);
+          // console.log(item.hash);
+          // console.log(item.fsize);
+          // console.log(item.mimeType);
+          // console.log(item.endUser);
+          // console.log(item.type);
         }
-        // console.log(key.length);
-        var privateBucketDomain = 'http://s30eih4r2.hb-bkt.clouddn.com';
-        var deadline = parseInt(Date.now() / 1000) + 3600; // 1小时过期
-        var privateDownloadUrl = bucketManager.privateDownloadUrl(privateBucketDomain, key, deadline);
-        console.log(privateDownloadUrl);
-        vedioArr.push(privateDownloadUrl)
-        // console.log(item.putTime);
-        // console.log(item.hash);
-        // console.log(item.fsize);
-        // console.log(item.mimeType);
-        // console.log(item.endUser);
-        // console.log(item.type);
+        
       });
     } else {
       console.log(respInfo.statusCode);
       console.log(respBody);
     }
+    console.log(vedioArr);
     res.send(vedioArr)
     
   });
 
 
-  
+}
 
-  
-});
+
 
 module.exports = router;
