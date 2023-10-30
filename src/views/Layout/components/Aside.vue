@@ -57,10 +57,12 @@ const switchType = (item,index) =>{
   align-items:center;
   overflow: hidden;
   div{
+    width: 8vw;
+    margin-left: 10px;
+    white-space: nowrap;
     height: 60px;
-    width: 100%;
     display: flex;
-    justify-content:center;
+    justify-content:space-around;
     align-items: center;
     border-radius: 15px;
     cursor: pointer;
@@ -72,7 +74,6 @@ const switchType = (item,index) =>{
     }
     span{
       line-height: 100%;
-      padding: 0 10px;
       display: flex;
       align-items: center;
     }
@@ -90,6 +91,7 @@ const switchType = (item,index) =>{
   @media screen and (max-width :500px){
     .Aside{
       div{
+        width: 7vw;
         flex-direction: column;
         span{
           padding: 0;
@@ -97,6 +99,13 @@ const switchType = (item,index) =>{
         .name{
           display: none;
         }
+      }
+    }
+  }
+  @media screen and (max-width :375px){
+    .Aside{
+      div{
+        display: none;
       }
     }
   }

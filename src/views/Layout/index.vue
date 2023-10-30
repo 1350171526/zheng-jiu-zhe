@@ -101,7 +101,19 @@ const getHot =async () =>{
 </template>
 
 <style lang="scss" scoped>
-
+  @media screen and (max-width :375px){
+    .common-layout{
+      .header{
+        height: 0 !important;
+      }
+      .aside{
+        width: 0 !important;
+      }
+      .el-main{
+        padding: 3vh !important;
+      }
+    }
+  }
 
   .common-layout{
     color: #fff;

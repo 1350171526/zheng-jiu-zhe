@@ -47,6 +47,20 @@ const next = () =>{
 </template>
 
 <style lang="scss" scoped>
+  @media screen and (max-width :375px){
+    .main{
+      .left{
+        width: 100% !important;
+        height: 100vh - 6vh  !important;
+      }
+      .right{
+        display: none;
+      }
+    }
+    
+    
+}
+
 .main{
   width: 100%;
   height: 100%;
@@ -62,8 +76,6 @@ const next = () =>{
     overflow: hidden;
 
     video{
-      transition: box-shadow 0.3s ease-in-out !important; /* 添加过渡效果 */  
-      box-shadow: none !important;  
       position: absolute;
       width: 100%;  
       height: 100%;  

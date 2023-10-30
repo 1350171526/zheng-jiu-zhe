@@ -10,10 +10,10 @@
     </div>
     <div class="middle">
       <input type="text" placeholder="搜索你感兴趣的内容">
-      <span>
+      <div class="search">
         <span class="iconfont icon-sousuo"></span>
         <div>搜索</div>
-      </span>
+      </div>
     </div>
     <div class="right">
       <div class="item" >
@@ -80,11 +80,18 @@
       }
     }
   }
+  @media screen and (max-width :375px){
+    .content{
+      display: none !important;
+    }
+  }
+
   .content{
     height: 10vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    overflow: hidden;
     .left{
       cursor: pointer;
       display: flex;
@@ -98,16 +105,20 @@
       }
     }
   .middle{
+    margin: 0 20px;
     width: 350px;
     height: 50px;
     border: 2px solid #BABABD;
     border-radius: 15px;
     display: flex;
+    flex-wrap: nowrap;
+
     justify-content: space-between;
     align-items: center;
+    
     &:hover{
       border: 2px solid #ffffff;
-      span{
+      .search {
         cursor: pointer;
         background-color: #fff;
         color: #000;
@@ -123,16 +134,21 @@
       caret-color: red;
       color: #fff;
     }
-    span{
+    .search{
       display: flex;
       align-items: center;
+      flex-wrap: nowrap;
       height: 50px;
       padding-right: 10px;
       border-top-right-radius: 15px;
       border-bottom-right-radius: 15px;
       span{
         height: 50px;
+        padding-right: 10px;
         line-height: 50px;
+      }
+      div{
+        white-space: nowrap;
       }
     }
     
