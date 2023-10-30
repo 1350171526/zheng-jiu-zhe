@@ -18,18 +18,20 @@ onMounted(() => {
   keyListen()
 })
 onBeforeUnmount(() => {
-  document.removeEventListener('keydown', keyListen);
+  document.removeEventListener('keydown', changeVideo);
 })
 
 const keyListen = () =>{
-  document.addEventListener('keydown', function(e) {  
-    if(e.key == "ArrowUp"){
+  document.addEventListener('keydown', changeVideo);
+}
+
+const changeVideo = (e) =>{
+  if(e.key == "ArrowUp"){
       lastVedio()
-    }
-    if(e.key == "ArrowDown"){
-      nextVedio()
-    }
-});
+  }
+  if(e.key == "ArrowDown"){
+    nextVedio()
+  }
 }
 
 const mousewheel = (e) =>{
@@ -60,10 +62,12 @@ const lastVedio = () =>{
 }
 
 const getMusic =async () =>{
+  index.value = 0
   const res = await getMusicApi()
   urlArr.value = res.data
 }
 const getHot =async () =>{
+  index.value = 0
   const res = await getHotApi()
   urlArr.value = res.data
 
@@ -74,8 +78,8 @@ const getHot =async () =>{
 
 <template>
   <div class="common-layout">
-    <el-container @keydown.up="lastVedio()" @keydown.down="nextVedio()">
-      <el-header class="header"><Headers></Headers></el-header>
+    <el-container>
+      <el-header class="header"><Headers ></Headers></el-header>
       <el-container>
         <el-aside class="aside">
           <Aside

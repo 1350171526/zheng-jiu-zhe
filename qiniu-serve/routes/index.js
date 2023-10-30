@@ -18,7 +18,7 @@ router.get('/hot', function(req, res, next) {
 router.get('/music', function(req, res, next) {
   getLink(res,'music')
 });
-const getLink = (res,path) =>{
+const getLink = (res,path,nextMarker) =>{
   // 获取单个路径地址
   // var config = new qiniu.conf.Config();
   // var bucketManager = new qiniu.rs.BucketManager(mac, config);
@@ -36,8 +36,9 @@ const getLink = (res,path) =>{
   var bucketManager = new qiniu.rs.BucketManager(mac, config);
   var bucket = 'zheng-jiu-zhe';
   var options = {
-    limit: 80,
+    limit: 10,
     prefix: path,
+    marker: nullq
   };
   bucketManager.listPrefix(bucket, options, function(err, respBody, respInfo) {
     if (err) {
@@ -48,6 +49,7 @@ const getLink = (res,path) =>{
       //如果这个nextMarker不为空，那么还有未列举完毕的文件列表，下次调用listPrefix的时候，
       //指定options里面的marker为这个值
       var nextMarker = respBody.marker;
+      console.log(nextMarker);
       var commonPrefixes = respBody.commonPrefixes;
       // console.log(nextMarker);
       // console.log(commonPrefixes);
