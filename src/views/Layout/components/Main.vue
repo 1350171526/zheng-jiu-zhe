@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 
 const props = defineProps({
   urlArr: {
@@ -60,6 +59,8 @@ const next = () =>{
     border-radius: 20px;
     border: none;
     background-color: rgba(0, 0, 0, 0.3); 
+    overflow: hidden;
+
     video{
       transition: box-shadow 0.3s ease-in-out !important; /* 添加过渡效果 */  
       box-shadow: none !important;  
@@ -68,7 +69,6 @@ const next = () =>{
       height: 100%;  
       z-index: 99;
       object-fit: contain; 
-     
     }
 
     video:focus { //取消视频边框外部出现白线
