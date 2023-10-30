@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref,defineEmits  } from "vue"
 const activeindex = ref(0)
  const State = ref([
   {id:1,name:'首页',icon:'iconfont icon-shouye'},
@@ -31,27 +31,29 @@ const activeindex = ref(0)
   {id:11,name:"我的",icon:'iconfont icon-wode'},
 ]) 
 
+const emit = defineEmits(['getVedio','getMusic','getHot'])
 const switchType = (item,index) =>{
   activeindex.value = index
   if(item.id==1){
-    console.log(1);
+    emit('getVedio')
   }
   if(item.id==2){
-    console.log(2);
+    emit('getMusic')
   }
   if(item.id==3){
-    console.log(3);
+    emit('getHot')
   }
 }
 </script>
 
  <style lang="scss" scoped>
  .Aside{
+  padding: 30px 0;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  justify-content:center;
+  justify-content:space-around;
   align-items:center;
   
   div{
