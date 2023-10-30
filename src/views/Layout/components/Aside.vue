@@ -62,10 +62,11 @@ const switchType = (item,index) =>{
     white-space: nowrap;
     height: 60px;
     display: flex;
-    justify-content:space-around;
+    justify-content:center;
     align-items: center;
     border-radius: 15px;
     cursor: pointer;
+    
     &.Color{
       background-color: rgba(255, 255, 255, 0.4);  
     }  
@@ -73,10 +74,12 @@ const switchType = (item,index) =>{
       background-color: rgba(255, 255, 255, 0.3); 
     }
     span{
+      padding: 0 10px;
       line-height: 100%;
       display: flex;
       align-items: center;
     }
+    
   }
  }
 
