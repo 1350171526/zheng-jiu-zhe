@@ -64,9 +64,11 @@ const switchType = (item,index) =>{
     border-radius: 15px;
     cursor: pointer;
     &.Color{
-  background-color: rgba(255, 255, 255, 0.4);  
-  color: #fff;
-}  
+      background-color: rgba(255, 255, 255, 0.4);  
+    }  
+    &:hover{
+      background-color: rgba(255, 255, 255, 0.3); 
+    }
     span{
       line-height: 100%;
       padding: 0 10px;
