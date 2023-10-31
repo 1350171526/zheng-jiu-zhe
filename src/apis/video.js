@@ -1,17 +1,26 @@
 import axios from 'axios'
 
-export function getVedioApi(){
+export function getVedioApi(marker){
   return axios({
-    url: '/api/total'
+    url: `/api/total`,
+    params:{
+      marker: marker
+    }
   })
 }
-export function getMusicApi(){
+export function getMusicApi(marker){
   return axios({
-    url: '/api/hot'
+    url: '/api/hot',
+    params:{
+      marker: marker
+    }
   })
 }
-export function getHotApi(){
+export function getHotApi(marker){
   return axios({
-    url: '/api/music'
+    url: '/api/music',
+    params:{
+      marker: marker
+    }
   })
 }

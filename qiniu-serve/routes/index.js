@@ -10,15 +10,22 @@ var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
 
 /* GET home page. */
 router.get('/total', function(req, res, next) {
-  getLink(res,'')
+  console.log(req.query.marker)
+  let marker = req.query.marker
+  getLink(res,'',marker)
+  
 });
 router.get('/hot', function(req, res, next) {
-  getLink(res,'hot')
+  console.log(req.query.marker)
+  let marker = req.query.marker
+  getLink(res,'hot',marker)
 });
 router.get('/music', function(req, res, next) {
-  getLink(res,'music')
+  console.log(req.query.marker)
+  let marker = req.query.marker
+  getLink(res,'music',marker)
 });
-const getLink = (res,path,nextMarker) =>{
+const getLink = (res,path,marker) =>{
   // 获取单个路径地址
   // var config = new qiniu.conf.Config();
   // var bucketManager = new qiniu.rs.BucketManager(mac, config);
@@ -36,9 +43,9 @@ const getLink = (res,path,nextMarker) =>{
   var bucketManager = new qiniu.rs.BucketManager(mac, config);
   var bucket = 'zheng-jiu-zhe';
   var options = {
-    limit: 10,
+    limit: 5,
     prefix: path,
-    marker: nullq
+    marker: marker
   };
   bucketManager.listPrefix(bucket, options, function(err, respBody, respInfo) {
     if (err) {
@@ -49,7 +56,6 @@ const getLink = (res,path,nextMarker) =>{
       //如果这个nextMarker不为空，那么还有未列举完毕的文件列表，下次调用listPrefix的时候，
       //指定options里面的marker为这个值
       var nextMarker = respBody.marker;
-      console.log(nextMarker);
       var commonPrefixes = respBody.commonPrefixes;
       // console.log(nextMarker);
       // console.log(commonPrefixes);
@@ -78,8 +84,8 @@ const getLink = (res,path,nextMarker) =>{
       console.log(respInfo.statusCode);
       console.log(respBody);
     }
-    console.log(vedioArr);
-    res.send(vedioArr)
+
+    res.send({vedioArr:vedioArr,nextMarker:nextMarker})
     
   });
 

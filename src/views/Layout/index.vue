@@ -2,15 +2,19 @@
   import Aside from "./components/Aside.vue";
   import Headers from "./components/Header.vue";
   import Main from "./components/Main.vue";
-
+  // import { ElMessage } from 'element-plus'
 import { getVedioApi,getMusicApi,getHotApi } from '@/apis/video';
 import { onMounted, ref, onBeforeUnmount } from 'vue';
 
 
-const urlArr = ref()
+const urlArr = ref([])
+let marker = null
+let type = ref("total")
 const getVedio =async () =>{
-  const res = await getVedioApi()
-  urlArr.value = res.data
+  type.value = "total"
+  const res = await getVedioApi(marker)
+  urlArr.value = res.data.vedioArr
+  marker = res.data.nextMarker
 }
 
 onMounted(() => {
@@ -45,11 +49,50 @@ const mousewheel = (e) =>{
 
 let index = ref(0)
 // 下一个视频
-const nextVedio = () =>{
+const nextVedio =async () =>{
+  // 节流避免重复点击
+
   if(index.value<urlArr.value.length-1){
     index.value++
+  }else if(!marker){
+    ElMessage({
+      message: '暂无更多视频，即将返回第一条视频...',
+      type: 'success',
+      center: true,
+    })
+    setTimeout(()=>{
+      index.value = 0
+    },2000)
+    return
   }else{
-    index.value = 0
+    // 判断视频的分类
+    switch (type.value) {  
+      case "total":  
+        const res = await getVedioApi(marker)
+        console.log(res);
+        marker = res.data.nextMarker
+        urlArr.value = [...urlArr.value,...res.data.vedioArr]
+        index.value++
+        break;  
+      case "music":  
+        const res1 = await getMusicApi(marker)
+        console.log(res1);
+        marker = res1.data.nextMarker
+        urlArr.value = [...urlArr.value,...res1.data.vedioArr]
+        index.value++ 
+        console.log("获取热门");
+        break;  
+      case "hot":  
+        const res2 = await getHotApi(marker)
+        console.log(res2);
+        marker = res2.data.nextMarker
+        urlArr.value = [...urlArr.value,...res2.data.vedioArr]
+        index.value++  
+        break;  
+      default:  
+        break;  
+    }
+    
   }
 }
 // 上一个视频
@@ -57,19 +100,29 @@ const lastVedio = () =>{
   if(index.value>0){
     index.value--
   }else{
-    index.value = urlArr.value.length-1
+    ElMessage({
+      message: '已经是第一条视频',
+      type: 'success',
+      center: true,
+    })
   }
 }
 
 const getMusic =async () =>{
+  type.value = "music"
+  marker = null
   index.value = 0
   const res = await getMusicApi()
-  urlArr.value = res.data
+  console.log(res)
+  marker = res.data.nextMarker
+  urlArr.value = res.data.vedioArr
 }
 const getHot =async () =>{
+  type.value = "hot"
   index.value = 0
   const res = await getHotApi()
-  urlArr.value = res.data
+  marker = res.data.nextMarker
+  urlArr.value = res.data.vedioArr
 
 }
 
