@@ -1,6 +1,5 @@
 <script setup>
 import { ref} from "vue";
-//点击弹出登录框
 
 //表单校验(账户名和密码)
 const form = ref({  
@@ -32,8 +31,7 @@ const rules = {
 
     }
   }]
-}
-    
+} 
 const dialogFormVisible = ref(true)
 //获取form实例统一校验
 const formRef = ref(null); 
@@ -41,7 +39,7 @@ const doLogin = () => {
       formRef.value.validate((valid) => {  
         if (valid) {  
           alert('提交成功');  
-          dialogFormVisible.value=false
+          dialogFormVisible.value=!dialogFormVisible.value
         } else {  
           alert('校验失败');  
           return false;  
@@ -50,25 +48,28 @@ const doLogin = () => {
     }
 
 
+const clickModal= ref(false)
 
+const emit = defineEmits(['update:visible']);
+const closeDialog = () => {
+  emit('update:visible', false); // 通过 emit 事件通知父组件关闭对话框
+}
 
 
 
 
 
 </script>
-
-
-
 <template>
  <el-dialog    
  v-model="dialogFormVisible"
 title="登录"    
-width="30%"   
-draggable
+width="30%"  
 modal
+:close-on-click-modal = clickModal
+@close="closeDialog"
 
- 
+
 > 
     <el-form
             ref="formRef"
@@ -89,7 +90,7 @@ modal
             </el-form>
      <template #footer>    
        <span class="dialog-footer">    
-         <el-button @click="dialogFormVisible =false">退出</el-button>    
+         <el-button @click="closeDialog">退出</el-button>    
          <el-button type="primary" @click="doLogin">登录</el-button>    
        </span>    
      </template>    

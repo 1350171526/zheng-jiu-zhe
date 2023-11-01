@@ -3,19 +3,24 @@ import { ref ,onMounted,onBeforeUnmount} from "vue"
 import Login from "@/views/Login/index.vue";
 
 
-const showLoginDialog = ref(false);
-
+/* const showLoginDialog = ref(false);
 const dialogVisible = () => {
   showLoginDialog.value = !showLoginDialog.value
+  console.log(showLoginDialog.value);
+}; */
+
+const showLoginDialog = ref(false);
+
+const closeDialog = (msg) => {
+  showLoginDialog.value = msg;
 };
 
 
 
 
-
-
 //监听屏幕变化
-const isDropdownVisible = ref(false) 
+const isDropdownVisible = ref(false)
+
 const onWindowResize = () => {
   if (window.innerWidth <= 1024) {  
         isDropdownVisible.value = true;  
@@ -84,14 +89,13 @@ const onWindowResize = () => {
         <span class="iconfont icon-zengjia"></span>
         <div>投稿</div>
       </div> 
-      <div class="item avatar" >
-        <img src="../../../assets/images/avatat.png" alt="" @click="dialogVisible" >
-        <!-- @dialogVisible="changeState" -->
+      <div class="item avatar" @click="showLoginDialog = !showLoginDialog" >
+        <img src="../../../assets/images/avatat.png" alt=""  >
       </div>
     </div>
   </div>
   <!-- 引入组件 -->
-   <Login v-if="showLoginDialog"></Login>
+   <Login v-if="showLoginDialog" @update:visible="closeDialog" ></Login>
 </template>
 
 <style lang="scss" scoped>
