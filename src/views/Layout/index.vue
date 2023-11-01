@@ -9,7 +9,10 @@ import { onMounted, ref, onBeforeUnmount } from 'vue';
 
 const urlArr = ref([])
 let marker = null
+let marker1 = null
+let marker2 = null
 let type = ref("total")
+// 获取首页全部视频
 const getVedio =async () =>{
   type.value = "total"
   const res = await getVedioApi(marker)
@@ -20,16 +23,15 @@ const getVedio =async () =>{
 onMounted(() => {
   getVedio()
   keyListen()
-  // console.log(new Data.getTime());
 })
+// 页面卸载钱移除监听事件
 onBeforeUnmount(() => {
   document.removeEventListener('keydown', changeVideo);
 })
-
+// 键盘上下键监听事件
 const keyListen = () =>{
   document.addEventListener('keydown', changeVideo);
 }
-
 const changeVideo = (e) =>{
   if(e.key == "ArrowUp"){
       lastVedio()
@@ -38,7 +40,7 @@ const changeVideo = (e) =>{
     nextVedio()
   }
 }
-
+// 鼠标滚轮事件
 const mousewheel = (e) =>{
   if(e.deltaY>0){
     nextVedio()
@@ -47,8 +49,8 @@ const mousewheel = (e) =>{
   }
 }
 
-let index = ref(0)
 // 下一个视频
+let index = ref(0)
 let nextTigger = 0
 const nextVedio =async () =>{
   // 节流防止频繁触发事件
@@ -72,23 +74,20 @@ const nextVedio =async () =>{
     switch (type.value) {  
       case "total":  
         const res = await getVedioApi(marker)
-        console.log(res);
         marker = res.data.nextMarker
         urlArr.value = [...urlArr.value,...res.data.vedioArr]
         index.value++
         break;  
       case "music":  
-        const res1 = await getMusicApi(marker)
-        console.log(res1);
-        marker = res1.data.nextMarker
+        const res1 = await getMusicApi(marker1)
+        marker1 = res1.data.nextMarker
         urlArr.value = [...urlArr.value,...res1.data.vedioArr]
         index.value++ 
         console.log("获取热门");
         break;  
       case "hot":  
-        const res2 = await getHotApi(marker)
-        console.log(res2);
-        marker = res2.data.nextMarker
+        const res2 = await getHotApi(marker2)
+        marker2 = res2.data.nextMarker
         urlArr.value = [...urlArr.value,...res2.data.vedioArr]
         index.value++  
         break;  
@@ -117,23 +116,37 @@ const lastVedio = () =>{
   }
   lastTigger = now
 }
-
+// 获取音乐分类视频
 const getMusic =async () =>{
   type.value = "music"
-  marker = null
-  index.value = 0
-  const res = await getMusicApi()
-  console.log(res)
-  marker = res.data.nextMarker
+  const res = await getMusicApi(marker1)
+  marker1 = res.data.nextMarker
   urlArr.value = res.data.vedioArr
 }
+// 获取热门视频
 const getHot =async () =>{
   type.value = "hot"
-  index.value = 0
-  const res = await getHotApi()
-  marker = res.data.nextMarker
+  const res = await getHotApi(marker2)
+  marker2 = res.data.nextMarker
   urlArr.value = res.data.vedioArr
-
+}
+// 点击首页全部视频
+const clickVideo = () =>{
+  urlArr.value = []
+  index.value = 0
+  getVedio()
+}
+// 点击音乐视频
+const clickMusic = () =>{
+  urlArr.value = []
+  index.value = 0
+  getMusic()
+}
+// 点击热门视频
+const clickHot = () =>{
+  urlArr.value = []
+  index.value = 0
+  getHot()
 }
 
 
@@ -146,9 +159,9 @@ const getHot =async () =>{
       <el-container>
         <el-aside class="aside">
           <Aside
-          @getVedio="getVedio"
-          @getMusic="getMusic"
-          @getHot="getHot"
+          @getVedio="clickVideo"
+          @getMusic="clickMusic"
+          @getHot="clickHot"
           >
           </Aside>
         </el-aside>
