@@ -8,16 +8,12 @@ import { onMounted, ref, onBeforeUnmount } from 'vue';
 
 
 const urlArr = ref([])
-let marker = null
-let marker1 = null
-let marker2 = null
 let type = ref("total")
 // 获取首页全部视频
 const getVedio =async () =>{
   type.value = "total"
-  const res = await getVedioApi(marker)
+  const res = await getVedioApi()
   urlArr.value = res.data.vedioArr
-  marker = res.data.nextMarker
 }
 
 onMounted(() => {
@@ -59,35 +55,21 @@ const nextVedio =async () =>{
     return 
   }else if(index.value<urlArr.value.length-1){
     index.value++
-  }else if(!marker){
-    ElMessage({
-      message: '暂无更多视频，即将返回第一条视频...',
-      type: 'success',
-      center: true,
-    })
-    setTimeout(()=>{
-      index.value = 0
-    },2000)
-    return
   }else{
     // 判断视频的分类
     switch (type.value) {  
       case "total":  
-        const res = await getVedioApi(marker)
-        marker = res.data.nextMarker
+        const res = await getVedioApi()
         urlArr.value = [...urlArr.value,...res.data.vedioArr]
         index.value++
         break;  
       case "music":  
-        const res1 = await getMusicApi(marker1)
-        marker1 = res1.data.nextMarker
+        const res1 = await getMusicApi()
         urlArr.value = [...urlArr.value,...res1.data.vedioArr]
         index.value++ 
-        console.log("获取热门");
         break;  
       case "hot":  
-        const res2 = await getHotApi(marker2)
-        marker2 = res2.data.nextMarker
+        const res2 = await getHotApi()
         urlArr.value = [...urlArr.value,...res2.data.vedioArr]
         index.value++  
         break;  
@@ -119,15 +101,13 @@ const lastVedio = () =>{
 // 获取音乐分类视频
 const getMusic =async () =>{
   type.value = "music"
-  const res = await getMusicApi(marker1)
-  marker1 = res.data.nextMarker
+  const res = await getMusicApi()
   urlArr.value = res.data.vedioArr
 }
 // 获取热门视频
 const getHot =async () =>{
   type.value = "hot"
-  const res = await getHotApi(marker2)
-  marker2 = res.data.nextMarker
+  const res = await getHotApi()
   urlArr.value = res.data.vedioArr
 }
 // 点击首页全部视频

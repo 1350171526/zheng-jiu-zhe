@@ -1,30 +1,40 @@
+const { log } = require('console');
 var express = require('express');
 // var app = express();
-   
+const fs = require('fs');
 var qiniu = require("qiniu");
 var router = express.Router();
-
 var accessKey = 'h6BkfhZ-X2xcGqz-qcy7J5FFoo5zuHr8me1e_Nw1';
 var secretKey = 'gzwDa0e4EgwUPVx3FzuvF05mw-kQJv8V6T9WUiBD';
 var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
 
 /* GET home page. */
 router.get('/total', function(req, res, next) {
-  console.log(req.query.marker)
-  let marker = req.query.marker
+  // 获取本地marker信息
+  let jsonData = fs.readFileSync('./public/marker.json','utf-8');
+  // 解析json数据
+  const data = JSON.parse(jsonData);
+  let marker = data.marker
   getLink(res,'',marker)
   
 });
 router.get('/hot', function(req, res, next) {
-  console.log(req.query.marker)
-  let marker = req.query.marker
+  // 获取本地marker信息
+  let jsonData = fs.readFileSync('./public/marker.json','utf-8');
+  // 解析json数据
+  const data = JSON.parse(jsonData);
+  let marker = data.marker1
   getLink(res,'hot',marker)
 });
 router.get('/music', function(req, res, next) {
-  console.log(req.query.marker)
-  let marker = req.query.marker
+  // 获取本地marker信息
+  let jsonData = fs.readFileSync('./public/marker.json','utf-8');
+  // 解析json数据
+  const data = JSON.parse(jsonData);
+  let marker = data.marker2
   getLink(res,'music',marker)
 });
+
 const getLink = (res,path,marker) =>{
   // 获取单个路径地址
   // var config = new qiniu.conf.Config();
@@ -59,6 +69,19 @@ const getLink = (res,path,marker) =>{
       var commonPrefixes = respBody.commonPrefixes;
       // console.log(nextMarker);
       // console.log(commonPrefixes);
+      // 写入marker数据
+      let jsonData = fs.readFileSync('./public/marker.json','utf-8');
+      const data = JSON.parse(jsonData);
+      if(options.prefix == ''){
+        data.marker = nextMarker || ''
+      }else if(options.prefix == 'hot'){
+        data.marker1 = nextMarker || ''
+      }else if(options.prefix == 'music'){
+        data.marker2 = nextMarker || ''
+      }
+      fs.writeFileSync('./public/marker.json', JSON.stringify(data));
+
+
       var items = respBody.items;
       items.forEach(function(item) {
         // console.log(item.key);
@@ -85,7 +108,7 @@ const getLink = (res,path,marker) =>{
       console.log(respBody);
     }
 
-    res.send({vedioArr:vedioArr,nextMarker:nextMarker})
+    res.send({vedioArr:vedioArr})
     
   });
 
