@@ -1,15 +1,37 @@
 <script setup>
-import { ref ,onMounted} from "vue"
+import { ref ,onMounted,onBeforeUnmount} from "vue"
+import Login from "@/views/Login/index.vue";
 
 
-const isDropdownVisible = ref(window.innerWidth <= 1024) // 初始值为屏幕宽度小于等于1024px  
-  
+const showLoginDialog = ref(false);
+
+const dialogVisible = () => {
+  showLoginDialog.value = !showLoginDialog.value
+};
+
+
+
+
+
+
+//监听屏幕变化
+const isDropdownVisible = ref(false) 
+const onWindowResize = () => {
+  if (window.innerWidth <= 1024) {  
+        isDropdownVisible.value = true;  
+      } else {  
+        isDropdownVisible.value = false;  
+      }  
+}
+
   onMounted(() => {  
-    window.addEventListener('resize', () => {  
-      isDropdownVisible.value = window.innerWidth <= 1024 // 更新屏幕宽度大于等于1024px时显示组件  
-    })  
+    window.addEventListener('resize',onWindowResize) 
+    
+    
   }) 
-
+  onBeforeUnmount(() => {
+    window.removeEventListener('resize',onWindowResize)
+  })
 </script>
 
 <template>
@@ -48,8 +70,7 @@ const isDropdownVisible = ref(window.innerWidth <= 1024) // 初始值为屏幕�
           <div class="dropdown-item">快捷访问</div>
         </div>
       </div>
-      <div class="item">
-        
+      <div class="item"> 
         <span class="iconfont icon-tishi"></span>
         <div>通知</div>
       </div>
@@ -62,12 +83,15 @@ const isDropdownVisible = ref(window.innerWidth <= 1024) // 初始值为屏幕�
         
         <span class="iconfont icon-zengjia"></span>
         <div>投稿</div>
-      </div>
+      </div> 
       <div class="item avatar" >
-        <img src="../../../assets/images/avatat.png" alt="">
+        <img src="../../../assets/images/avatat.png" alt="" @click="dialogVisible" >
+        <!-- @dialogVisible="changeState" -->
       </div>
     </div>
   </div>
+  <!-- 引入组件 -->
+   <Login v-if="showLoginDialog"></Login>
 </template>
 
 <style lang="scss" scoped>
@@ -92,7 +116,7 @@ const isDropdownVisible = ref(window.innerWidth <= 1024) // 初始值为屏幕�
     .content{
       .right{
         .item{
-          &:nth-child(n+4):nth-child(-n+6){
+          &:nth-child(n+4):nth-child(-n+7){
             display: none;
             // color: #000;
           }
@@ -193,7 +217,7 @@ const isDropdownVisible = ref(window.innerWidth <= 1024) // 初始值为屏幕�
         left: 0px;
         border-left: 10px;
         min-width: 120px;
-        background-color:rgba(51, 51, 51); 
+        background-color:#102543; 
         opacity: 0;
         transition: all 0.4s 0.2s;
         transform: translateY(-200px) scale(1, 0);
@@ -233,7 +257,7 @@ const isDropdownVisible = ref(window.innerWidth <= 1024) // 初始值为屏幕�
       margin-right: 10px;
     }
     :hover{
-        color: #fff;
+       
         cursor: pointer;
     }
   }

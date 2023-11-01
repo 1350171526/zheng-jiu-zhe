@@ -100,6 +100,7 @@ const getHot =async () =>{
   </div>
 </template>
 
+
 <style lang="scss" scoped>
   @media screen and (max-width :375px){
     .common-layout{
