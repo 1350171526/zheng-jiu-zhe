@@ -20,6 +20,7 @@ const getVedio =async () =>{
 onMounted(() => {
   getVedio()
   keyListen()
+  // console.log(new Data.getTime());
 })
 onBeforeUnmount(() => {
   document.removeEventListener('keydown', changeVideo);
@@ -41,18 +42,20 @@ const changeVideo = (e) =>{
 const mousewheel = (e) =>{
   if(e.deltaY>0){
     nextVedio()
-  }
-  if(e.deltaY<0){
+  }else if(e.deltaY<0){
     lastVedio()
   }
 }
 
 let index = ref(0)
 // 下一个视频
+let nextTigger = 0
 const nextVedio =async () =>{
-  // 节流避免重复点击
-
-  if(index.value<urlArr.value.length-1){
+  // 节流防止频繁触发事件
+  const now = Date.now()
+  if(now - nextTigger<1500){
+    return 
+  }else if(index.value<urlArr.value.length-1){
     index.value++
   }else if(!marker){
     ElMessage({
@@ -94,10 +97,16 @@ const nextVedio =async () =>{
     }
     
   }
+  nextTigger = now
 }
 // 上一个视频
+let lastTigger = 0
 const lastVedio = () =>{
-  if(index.value>0){
+  // 节流防止频繁触发事件
+  let now = Date.now()
+  if(now - lastTigger<1500){
+    return
+  }else if(index.value>0){
     index.value--
   }else{
     ElMessage({
@@ -106,6 +115,7 @@ const lastVedio = () =>{
       center: true,
     })
   }
+  lastTigger = now
 }
 
 const getMusic =async () =>{
