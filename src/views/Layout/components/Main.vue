@@ -1,5 +1,9 @@
 <script setup>
+import { onMounted } from "vue"
 
+onMounted(()=>{
+  findvideocover()
+})
 const props = defineProps({
   urlArr: {
     type: Array, 
@@ -18,25 +22,43 @@ const last = () =>{
 const next = () =>{
   emit('nextVedio')
 }
-
+const findvideocover = () =>{
+    console.log("chixing");
+    const  video = document.getElementById("upvideo"); 
+    var canvas = document.getElementById('mycanvas') 
+    console.log(canvas);
+    const ctx = canvas.getContext('2d'); 
+    video.crossOrigin = 'anonymous' // 解决跨域问题，也就是提示污染资源无法转换视频
+    video.currentTime = 1 // 第一帧
+    video.oncanplay = () => {
+    canvas.width = video.clientWidth ; // 获取视频宽度
+    canvas.height = video.clientHeight ; //获取视频高度
+    // 利用canvas对象方法绘图
+    ctx.drawImage(video, 0, 0, video.clientWidth,video.clientHeight)
+    // 转换成base64形式
+    // console.log(canvas.toDataURL())
+    // this.videoImg = canvas.toDataURL ("image/png") // 截取后的视频封面
+  }
+}
 </script>
 
 <template>
   <div class="main">
     <div class="left">
       <video 
-      class="my-vedio"
-      playsinline="true"
-      :src="props.urlArr[props.index]" 
-      controls="controls" 
-      type="video/mp4"
-      loop
-      autoplay="autoplay"
-      muted
-      controlsList="nodownload  noremoteplayback noplaybackrate" 
-      disablePictureInPicture="true"
-      v-if="props.urlArr"
+        id="upvideo"
+        playsinline="true"
+        :src="props.urlArr[props.index]" 
+        controls="controls" 
+        type="video/mp4"
+        loop
+        autoplay="autoplay"
+        muted
+        controlsList="nodownload  noremoteplayback noplaybackrate" 
+        disablePictureInPicture="true"
+        v-if="props.urlArr"
       ></video>
+      <canvas id='mycanvas'></canvas>
     </div>
     <div class="right">
       <span class="iconfont icon-jiantoushang" @click="last()"></span>
@@ -61,11 +83,13 @@ const next = () =>{
     
 }
 
+
 .main{
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
+  overflow: hidden;
   .left{
     position: relative;
     width: 95%;
@@ -74,7 +98,7 @@ const next = () =>{
     border: none;
     background-color: rgba(0, 0, 0, 0.3); 
     overflow: hidden;
-
+    
     video{
       position: absolute;
       width: 100%;  
@@ -82,14 +106,23 @@ const next = () =>{
       z-index: 99;
       object-fit: contain; 
     }
-
+    canvas{
+      width: 200%;
+      height: 200%;
+      position: absolute;
+      left: -50%;
+      top: -50%;
+      filter: blur(40px);
+    }
     video:focus { //取消视频边框外部出现白线
     outline: -webkit-focus-ring-color auto 0px;
     }
     video::-webkit-media-controls-timeline {
         width: 100%;
         position: absolute;
-        left: -15px;
+        left: 50%;
+        transform: translateX(-50%); 
+        // margin: 0 auto;
         margin-bottom: 30px;
       }
 
