@@ -1,5 +1,12 @@
 <script setup>
+import Avatar from '@/views/MainList/Avatar.vue'
+import Collect from '@/views/MainList/Collect.vue'
+import Comment from '@/views/MainList/Comment.vue'
+import Like from '@/views/MainList/Like.vue'
+import Share from '@/views/MainList/Share.vue'
+
 import { onMounted } from "vue"
+import AvatarVue from "@/views/MainList/Avatar.vue"
 
 onMounted(()=>{
   findvideocover()
@@ -23,10 +30,8 @@ const next = () =>{
   emit('nextVedio')
 }
 const findvideocover = () =>{
-    console.log("chixing");
     const  video = document.getElementById("upvideo"); 
     var canvas = document.getElementById('mycanvas') 
-    console.log(canvas);
     const ctx = canvas.getContext('2d'); 
     video.crossOrigin = 'anonymous' // 解决跨域问题，也就是提示污染资源无法转换视频
     video.currentTime = 1 // 第一帧
