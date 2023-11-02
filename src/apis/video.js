@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export function getVedioApi(){
   return axios({
-    url: '/api/total'
+    url: `/api/total`
   })
 }
 export function getMusicApi(){
