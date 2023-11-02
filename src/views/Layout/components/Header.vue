@@ -261,7 +261,7 @@ const onWindowResize = () => {
       margin-right: 10px;
     }
     :hover{
-       
+       color: #fff;
         cursor: pointer;
     }
   }
