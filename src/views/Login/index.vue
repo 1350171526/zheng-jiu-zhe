@@ -3,11 +3,7 @@ import { ref} from "vue";
 import { ElMessage } from 'element-plus';
 
 
-//点击显示短信验证并且切换
-const isPasswordLogin=ref(true)
-const changePasswordLogin=() => {
-  isPasswordLogin.value=!isPasswordLogin.value
-}
+
 
 
 
@@ -29,14 +25,9 @@ const sendSmsVerification = () => {
 
 
 
-  
-
-
-
-
 //表单校验(账户名和密码)
 const form = ref({  
-      username: '',  
+      account: '',  
       password: '' ,
       authcode:'',
       agree:false
@@ -90,6 +81,18 @@ const emit = defineEmits(['update:visible']);
 const closeDialog = () => {
   emit('update:visible', false); // 通过 emit 事件通知父组件关闭对话框
 }
+
+
+//点击显示短信验证并且切换
+const isPasswordLogin=ref(true)
+const changePasswordLogin=() => {
+  isPasswordLogin.value=!isPasswordLogin.value
+  //切换时清空表单gu
+  form.value.password=''
+}
+
+
+
 
 
 
