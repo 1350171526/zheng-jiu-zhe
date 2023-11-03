@@ -119,7 +119,7 @@ modal
               status-icon 
             >
               <el-form-item prop="account" label="账号">
-                <el-input  v-model="form.account" placeholder="请输入手机号" />
+                <el-input v-model="form.account" placeholder="请输入手机号" />
                 
               </el-form-item>
               <el-form-item prop="password" label="密码">
@@ -144,7 +144,7 @@ modal
               status-icon 
         >
         <el-form-item prop="account" label="账号">
-          <el-input  placeholder="请输入手机号" >
+          <el-input  v-model="form.account" placeholder="请输入手机号" >
             <template #append>
               <el-button  @click="sendSmsVerification" :disabled="isSendingSms">
                 {{ isSendingSms ? '发送中...' : '短信验证' }}
