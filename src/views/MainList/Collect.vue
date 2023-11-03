@@ -5,8 +5,10 @@ let number = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 
 <template>
   <div class="group">
-    <text class="iconfont icon-shoucang"></text>
-    {{ number }}
+    <div class="collect">
+      <text class="iconfont icon-shoucang"></text>
+      {{ number }}
+    </div>
     <div class="layer">
       <span class="top">选择收藏夹</span>
       <span class="middle">
@@ -25,10 +27,17 @@ let number = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 .group{
   cursor: pointer;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  // justify-content: space-between;
+  .collect{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    &:hover{
+      .iconfont{
+        animation: mymove 0.5s ease;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
   text{
     height: 30px;
     font-size: 25px;

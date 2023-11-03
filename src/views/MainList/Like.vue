@@ -5,12 +5,14 @@ let number = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 
 <template>
   <div class="group">
-    <text class="iconfont icon-aixin"></text>
-  {{ number }}
-  <div class="layer">
-    <span>点赞</span>
-    <span>Z</span>
-  </div>
+    <div class="like">
+      <text class="iconfont icon-aixin"></text>
+      {{ number }}  
+    </div>
+    <div class="layer">
+      <span>点赞</span>
+      <span>Z</span>
+    </div>
   </div>
 
 </template>
@@ -19,9 +21,17 @@ let number = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 .group{
   position: relative;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  .like{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    &:hover{
+      .iconfont{
+        animation: mymove 0.5s ease;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
   text{
     height: 30px;
     font-size: 25px;

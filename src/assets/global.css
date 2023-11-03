@@ -1,0 +1,15 @@
+@keyframes mymove {
+  50%{
+    transform-origin: bottom;
+    transform: rotate( -15deg ) scale(1.2);
+  }
+  80%{
+    transform-origin: bottom;
+    transform: rotate( 5deg ) scale(1.2);
+  }
+  100% {
+    transform-origin: bottom;
+    transform: rotate( 0deg ) scale(1.2);
+  }
+
+}

@@ -5,8 +5,11 @@ let number = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 
 <template>
   <div class="group">
-    <text class="iconfont icon-fenxiang"></text>
-    {{ number }}
+    <div class="share">
+      <text class="iconfont icon-fenxiang"></text>
+      {{ number }}
+    </div>
+    
     <div class="layer">
       <span class="top">
         <span class="iconfont icon-sousuo"></span>
@@ -45,10 +48,18 @@ let number = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 <style lang="scss" scoped>
 .group{
   position: relative;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   cursor: pointer;
+  .share{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    &:hover{
+      .iconfont{
+        animation: mymove 0.5s ease;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
   text{
     height: 30px;
     font-size: 25px;
