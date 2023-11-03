@@ -4,9 +4,9 @@ import Collect from '@/views/MainList/Collect.vue'
 import Comment from '@/views/MainList/Comment.vue'
 import Like from '@/views/MainList/Like.vue'
 import Share from '@/views/MainList/Share.vue'
+import More from '@/views/MainList/More.vue'
 
 import { onMounted } from "vue"
-import AvatarVue from "@/views/MainList/Avatar.vue"
 
 onMounted(()=>{
   findvideocover()
@@ -70,7 +70,7 @@ const findvideocover = () =>{
         <div><Comment/></div>
         <div><Collect/></div>
         <div><Share/></div>
-        <span class="more">···</span>
+        <div><More/></div>
       </div>
       <canvas id='mycanvas'></canvas>
     </div>
@@ -124,16 +124,8 @@ const findvideocover = () =>{
       right: 0;
       top: 25%;
       transform: translateX(-50%);
-      // transform: translateY(-50%);
       z-index: 100;
-      :nth-child(n){
-        cursor: pointer;
-      }
-      span{
-        text-align: center;
-        letter-spacing: 2px; 
-        font-size: 25px;
-      }
+
     }
     video{
       position: absolute;
