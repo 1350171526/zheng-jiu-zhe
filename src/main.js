@@ -1,4 +1,5 @@
 import './assets/main.css'
+import './assets/global.css'
 import '../src/assets/iconfont/iconfont.css'
 
 import './assets/fonts/iconfont.css'

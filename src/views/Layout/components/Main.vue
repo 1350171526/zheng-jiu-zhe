@@ -1,4 +1,11 @@
 <script setup>
+import Avatar from '@/views/MainList/Avatar.vue'
+import Collect from '@/views/MainList/Collect.vue'
+import Comment from '@/views/MainList/Comment.vue'
+import Like from '@/views/MainList/Like.vue'
+import Share from '@/views/MainList/Share.vue'
+import More from '@/views/MainList/More.vue'
+
 import { onMounted } from "vue"
 
 onMounted(()=>{
@@ -23,10 +30,8 @@ const next = () =>{
   emit('nextVedio')
 }
 const findvideocover = () =>{
-    console.log("chixing");
     const  video = document.getElementById("upvideo"); 
     var canvas = document.getElementById('mycanvas') 
-    console.log(canvas);
     const ctx = canvas.getContext('2d'); 
     video.crossOrigin = 'anonymous' // 解决跨域问题，也就是提示污染资源无法转换视频
     video.currentTime = 1 // 第一帧
@@ -40,6 +45,7 @@ const findvideocover = () =>{
     // this.videoImg = canvas.toDataURL ("image/png") // 截取后的视频封面
   }
 }
+
 </script>
 
 <template>
@@ -58,6 +64,14 @@ const findvideocover = () =>{
         disablePictureInPicture="true"
         v-if="props.urlArr"
       ></video>
+      <div class="list">
+        <div><Avatar/></div>
+        <div><Like/></div>
+        <div><Comment/></div>
+        <div><Collect/></div>
+        <div><Share/></div>
+        <div><More/></div>
+      </div>
       <canvas id='mycanvas'></canvas>
     </div>
     <div class="right">
@@ -98,7 +112,21 @@ const findvideocover = () =>{
     border: none;
     background-color: rgba(0, 0, 0, 0.3); 
     overflow: hidden;
-    
+
+    .list{
+      height: 60%;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      margin-right: 40px;
+      right: 0;
+      top: 25%;
+      transform: translateX(-50%);
+      z-index: 100;
+
+    }
     video{
       position: absolute;
       width: 100%;  
