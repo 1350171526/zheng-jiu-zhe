@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4300953 */
-  src: url('./iconfont.woff2?t=1698630317974') format('woff2'),
-       url('./iconfont.woff?t=1698630317974') format('woff'),
-       url('./iconfont.ttf?t=1698630317974') format('truetype');
+  src: url('./iconfont.woff2?t=1698979970256') format('woff2'),
+       url('./iconfont.woff?t=1698979970256') format('woff'),
+       url('./iconfont.ttf?t=1698979970256') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,58 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-jurassic_user:before {
+  content: "\e6a5";
+}
+
+.icon-weixin1:before {
+  content: "\e601";
+}
+
+.icon-erweima:before {
+  content: "\e602";
+}
+
+.icon-lianjie:before {
+  content: "\e607";
+}
+
+.icon-QQ:before {
+  content: "\e609";
+}
+
+.icon-pinglun:before {
+  content: "\e63a";
+}
+
+.icon-shouji:before {
+  content: "\e692";
+}
+
+.icon-shoucang:before {
+  content: "\e86d";
+}
+
+.icon-jianpan:before {
+  content: "\e618";
+}
+
+.icon-fenxiang:before {
+  content: "\e72f";
+}
+
+.icon-buganxingqu_line:before {
+  content: "\e605";
+}
+
+.icon-aixin:before {
+  content: "\e8c3";
+}
+
+.icon-jubao:before {
+  content: "\e606";
 }
 
 .icon-gengduo-copy:before {

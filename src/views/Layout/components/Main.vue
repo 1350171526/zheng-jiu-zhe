@@ -45,6 +45,7 @@ const findvideocover = () =>{
     // this.videoImg = canvas.toDataURL ("image/png") // 截取后的视频封面
   }
 }
+
 </script>
 
 <template>
@@ -63,6 +64,14 @@ const findvideocover = () =>{
         disablePictureInPicture="true"
         v-if="props.urlArr"
       ></video>
+      <div class="list">
+        <div><Avatar/></div>
+        <div><Like/></div>
+        <div><Comment/></div>
+        <div><Collect/></div>
+        <div><Share/></div>
+        <span class="more">···</span>
+      </div>
       <canvas id='mycanvas'></canvas>
     </div>
     <div class="right">
@@ -103,7 +112,29 @@ const findvideocover = () =>{
     border: none;
     background-color: rgba(0, 0, 0, 0.3); 
     overflow: hidden;
-    
+
+    .list{
+      height: 60%;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      margin-right: 40px;
+      right: 0;
+      top: 25%;
+      transform: translateX(-50%);
+      // transform: translateY(-50%);
+      z-index: 100;
+      :nth-child(n){
+        cursor: pointer;
+      }
+      span{
+        text-align: center;
+        letter-spacing: 2px; 
+        font-size: 25px;
+      }
+    }
     video{
       position: absolute;
       width: 100%;  
