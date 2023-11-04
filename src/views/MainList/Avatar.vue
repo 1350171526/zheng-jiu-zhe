@@ -25,41 +25,37 @@
 <style lang="scss" scoped>
 .group{
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 37px;
+  height: 37px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #1296db;
   border-radius: 50%;
   margin-bottom: 10px;
+  box-shadow: 0 0 5px 3px rgba(0,0,0,0.2);
   cursor: pointer;
   .item{
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     background-color: red;
     position: absolute;
     bottom: 0px;
     border-radius: 50%;
-    transform: translateY(60%);
+    transform: translateY(50%);
   }
   .font{
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     display: flex;
     justify-content: center;
     position: absolute;
     bottom: 0px;
-    font-size: 20px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 18px;
     font-weight: bolder;
-    transform: translateY(50%);
-    &:not(.group):hover{
-    .add{
-      opacity: 1;
-      transform: none;
-    }
-  }
+    transform: translateY(40%);
+    
   .add{
     font-size: 14px;
     opacity: 0;
@@ -99,18 +95,28 @@
     }
   }
   }
+  :hover{
+  .add{
+    opacity: 1;
+    transform: none;
+  }
+  }
+  text{
+    font-size: 20px !important;
+  }
   .iconfont{
     height: 25px;
     font-size: 25px;
     &:hover{
     .layer{
+      
       opacity: 1;
       transform: none;
     }
    }
   .layer{
     font-size: 14px;
-    opacity: 0;
+    opacity: 1;
     display: flex;
     white-space: nowrap;
     position: absolute;
