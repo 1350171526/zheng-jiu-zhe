@@ -52,7 +52,7 @@ provide('change',change)
 const nextVedio =async () =>{
   // 节流防止频繁触发事件
   const now = Date.now()
-  if(now - nextTigger<1500){
+  if(now - nextTigger<1000){
     return 
   }else if(index.value<urlArr.value.length-2){
     change.value = !change.value
@@ -88,9 +88,10 @@ let lastTigger = 0
 const lastVedio = () =>{
   // 节流防止频繁触发事件
   let now = Date.now()
-  if(now - lastTigger<1500){
+  if(now - lastTigger<1000){
     return
   }else if(index.value>0){
+    change.value = !change.value
     index.value--
   }else{
     ElMessage({

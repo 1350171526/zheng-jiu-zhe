@@ -19,9 +19,7 @@ watch(change, () => {
     <div class="layer">
       <span class="top">
         <span class="iconfont icon-sousuo"></span>
-        <span>搜索</span>
-
-        <input type="text">
+        <input type="text" placeholder="搜索">
       </span>
       <span class="middle">
         <span class="share">分享给朋友</span>
@@ -104,7 +102,7 @@ watch(change, () => {
       border-radius: 5px;
 
       span{
-        margin-left: 10px;
+        margin: 0 10px;
         &:nth-child(2){
           margin-right: 10px;
         }

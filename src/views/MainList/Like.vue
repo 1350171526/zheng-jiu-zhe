@@ -5,14 +5,25 @@ let number = ref()
 number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 
 watch(change, () => {  
+  isSelect.value=false
   number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 }); 
+
+const isSelect = ref(false)
+const like = () =>{
+  if(isSelect.value){
+    number.value--
+  }else{
+    number.value++
+  }
+  isSelect.value = !isSelect.value 
+}
 </script>
 
 <template>
   <div class="group">
-    <div class="like">
-      <text class="iconfont icon-aixin"></text>
+    <div class="like" @click="like">
+      <text class="iconfont icon-aixin" :class="isSelect ? 'select' : 'noselect'"></text>
       {{ number }}  
     </div>
     <div class="layer">
@@ -31,12 +42,20 @@ watch(change, () => {
     display: flex;
     align-items: center;
     flex-direction: column;
+    
+    
+    .select{
+      animation: click 0.5s ease;
+      animation-fill-mode: forwards;
+    }
     &:hover{
-      .iconfont{
+      .noselect{
         animation: mymove 0.5s ease;
         animation-fill-mode: forwards;
       }
+      
     }
+
   }
   text{
     height: 30px;
