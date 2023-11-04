@@ -53,7 +53,7 @@ const nextVedio =async () =>{
   const now = Date.now()
   if(now - nextTigger<1500){
     return 
-  }else if(index.value<urlArr.value.length-1){
+  }else if(index.value<urlArr.value.length-2){
     index.value++
   }else{
     // 判断视频的分类
