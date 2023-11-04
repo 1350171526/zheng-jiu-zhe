@@ -1,6 +1,7 @@
 <script setup>
 import { ref ,onMounted,onBeforeUnmount} from "vue"
 import Login from "@/views/Login/index.vue";
+import Client from "@/views/HeaderList/Client.vue"
 
 
 /* const showLoginDialog = ref(false);
@@ -14,6 +15,7 @@ const showLoginDialog = ref(false);
 const closeDialog = (msg) => {
   showLoginDialog.value = msg;
 };
+
 
 
 
@@ -57,10 +59,11 @@ const onWindowResize = () => {
         <span class="iconfont icon-yulebao"></span>
         <div>充牛币</div>
       </div>
-      <div class="item" >
-        <span class="iconfont icon-xiazai"></span>
-        <div>客户端</div>
+      <div class="item" style="position: relative;">
+        
+        <Client></Client>
       </div>
+      
       <div class="item" >
         <span class="iconfont icon-shandian"></span>
         <div>快捷访问</div>
