@@ -7,7 +7,23 @@ var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
 /* GET users listing. */
 router.get('/upload', function(req, res, next) {
   var options = {
-    scope: 'zheng-jiu-zhe',
+    scope: 'zheng-jiu-zhe/video',
+  };
+  var putPolicy = new qiniu.rs.PutPolicy(options);
+  var token=putPolicy.uploadToken(mac);
+  res.send(token);
+});
+router.get('/upload/hot', function(req, res, next) {
+  var options = {
+    scope: 'zheng-jiu-zhe/hot',
+  };
+  var putPolicy = new qiniu.rs.PutPolicy(options);
+  var token=putPolicy.uploadToken(mac);
+  res.send(token);
+});
+router.get('/upload/music', function(req, res, next) {
+  var options = {
+    scope: 'zheng-jiu-zhe/music',
   };
   var putPolicy = new qiniu.rs.PutPolicy(options);
   var token=putPolicy.uploadToken(mac);
