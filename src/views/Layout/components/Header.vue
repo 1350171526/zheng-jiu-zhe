@@ -3,6 +3,7 @@ import { ref ,onMounted,onBeforeUnmount} from "vue"
 import Login from "@/views/Login/index.vue";
 import Client from "@/views/HeaderList/Client.vue"
 import Access from "@/views/HeaderList/Access.vue"
+import Message from "@/views/HeaderList/Message.vue"
 
 
 /* const showLoginDialog = ref(false);
@@ -66,7 +67,6 @@ const onWindowResize = () => {
       </div>
       
       <div class="item" >
-        
         <Access></Access>
       </div>
 
@@ -86,8 +86,8 @@ const onWindowResize = () => {
       </div>
       <div class="item">
         
-        <span class="iconfont icon-weixin"></span>
-        <div>私信</div>
+        
+        <Message></Message>
       </div>
       <div class="item">
         

@@ -1,9 +1,5 @@
 <!-- 访问 -->
-<template>
-
-    <!-- <div class="iconfont icon-shandian"></div>
-        <div>快捷访问</div> -->
-      
+<template> 
   <div class="Access">
     <div class="iconfont icon-shandian"></div>
     <div>快捷访问</div>
