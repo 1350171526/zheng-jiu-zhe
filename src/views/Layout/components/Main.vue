@@ -169,7 +169,7 @@ const findvideocover = () =>{
       flex-direction: column;
       justify-content: space-around;
       align-items: center;
-      margin-right: 40px;
+      margin-right: 30px;
       right: 0;
       top: 25%;
       transform: translateX(-50%);

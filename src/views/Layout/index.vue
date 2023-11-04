@@ -4,7 +4,7 @@
   import Main from "./components/Main.vue";
   // import { ElMessage } from 'element-plus'
 import { getVedioApi,getMusicApi,getHotApi } from '@/apis/video';
-import { onMounted, ref, onBeforeUnmount } from 'vue';
+import { onMounted, ref, onBeforeUnmount, provide } from 'vue';
 
 
 const urlArr = ref([])
@@ -44,18 +44,21 @@ const mousewheel = (e) =>{
     lastVedio()
   }
 }
-
+let change = ref(false)
 // 下一个视频
 let index = ref(0)
 let nextTigger = 0
+provide('change',change)
 const nextVedio =async () =>{
   // 节流防止频繁触发事件
   const now = Date.now()
   if(now - nextTigger<1500){
     return 
   }else if(index.value<urlArr.value.length-2){
+    change.value = !change.value
     index.value++
   }else{
+    change.value = !change.value
     // 判断视频的分类
     switch (type.value) {  
       case "total":  
