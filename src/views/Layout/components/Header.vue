@@ -2,6 +2,7 @@
 import { ref ,onMounted,onBeforeUnmount} from "vue"
 import Login from "@/views/Login/index.vue";
 import Client from "@/views/HeaderList/Client.vue"
+import Access from "@/views/HeaderList/Access.vue"
 
 
 /* const showLoginDialog = ref(false);
@@ -59,15 +60,16 @@ const onWindowResize = () => {
         <span class="iconfont icon-yulebao"></span>
         <div>充牛币</div>
       </div>
-      <div class="item" style="position: relative;">
+      <div class="item" >
         
         <Client></Client>
       </div>
       
       <div class="item" >
-        <span class="iconfont icon-shandian"></span>
-        <div>快捷访问</div>
+        
+        <Access></Access>
       </div>
+
       <div class="item menu" v-if="isDropdownVisible" >
         <span class="iconfont icon-xiazai curr"></span>
         更多

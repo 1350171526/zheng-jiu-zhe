@@ -35,6 +35,7 @@
 
 <style lang="scss" scoped>
 .Client{
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +60,7 @@
         background-color:#102543; 
         opacity: 0;
         transition: all 0.2s 0.2s;
-        transform: translateY(-200px) scale(1, 0);
+        transform: translateY(-100px) scale(1, 0);
         border-radius: 10px;
         .dropdown-item{
           display: flex;
