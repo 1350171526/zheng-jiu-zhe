@@ -84,7 +84,7 @@ const switchType = (item,index) =>{
  }
 
 
-  @media screen and (max-width :860px){
+  @media screen and (max-width :876px){
     .Aside{
       div{
         flex-direction: column;

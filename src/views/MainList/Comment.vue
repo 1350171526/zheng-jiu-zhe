@@ -1,5 +1,13 @@
 <script setup>
-let number = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
+
+import { inject,ref, watch } from "vue"
+const change = inject('change')
+let number = ref()
+number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
+
+watch(change, () => {  
+  number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
+}); 
 
 </script>
 

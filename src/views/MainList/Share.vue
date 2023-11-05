@@ -1,6 +1,12 @@
 <script setup>
-let number = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
+import { inject,ref, watch } from "vue"
+const change = inject('change')
+let number = ref()
+number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 
+watch(change, () => {  
+  number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
+}); 
 </script>
 
 <template>
@@ -13,9 +19,7 @@ let number = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
     <div class="layer">
       <span class="top">
         <span class="iconfont icon-sousuo"></span>
-        <span>搜索</span>
-
-        <input type="text">
+        <input type="text" placeholder="搜索">
       </span>
       <span class="middle">
         <span class="share">分享给朋友</span>
@@ -98,7 +102,7 @@ let number = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
       border-radius: 5px;
 
       span{
-        margin-left: 10px;
+        margin: 0 10px;
         &:nth-child(2){
           margin-right: 10px;
         }

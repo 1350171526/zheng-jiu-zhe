@@ -13,3 +13,12 @@
   }
 
 }
+@keyframes click {
+  50%{
+    transform: scale(0.1);
+  }
+  100%{
+    transform: scale(1);
+    color: #FE2C55;
+  }
+}

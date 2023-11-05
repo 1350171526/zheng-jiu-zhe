@@ -7,7 +7,6 @@ import Share from '@/views/MainList/Share.vue'
 import More from '@/views/MainList/More.vue'
 
 import { onMounted } from "vue"
-
 onMounted(()=>{
   findvideocover()
 })
@@ -50,30 +49,59 @@ const findvideocover = () =>{
 
 <template>
   <div class="main">
-    <div class="left">
-      <video 
-        id="upvideo"
-        playsinline="true"
-        :src="props.urlArr[props.index]" 
-        controls="controls" 
-        type="video/mp4"
-        loop
-        autoplay="autoplay"
-        muted
-        controlsList="nodownload  noremoteplayback noplaybackrate" 
-        disablePictureInPicture="true"
-        v-if="props.urlArr"
-      ></video>
-      <div class="list">
-        <div><Avatar/></div>
-        <div><Like/></div>
-        <div><Comment/></div>
-        <div><Collect/></div>
-        <div><Share/></div>
-        <div><More/></div>
+    <div class="video">
+      <div class="left">
+        <video 
+          playsinline="true"
+          :src="props.urlArr[props.index-1]" 
+          controls="controls" 
+          type="video/mp4"
+          preload
+          muted
+          controlsList="nodownload  noremoteplayback noplaybackrate" 
+          disablePictureInPicture="true"
+          v-if="props.urlArr"
+        ></video>
       </div>
-      <canvas id='mycanvas'></canvas>
+      <div class="left">
+        <video 
+          id="upvideo"
+          playsinline="true"
+          :src="props.urlArr[props.index]" 
+          controls="controls" 
+          type="video/mp4"
+          loop
+          autoplay="autoplay"
+          muted
+          controlsList="nodownload  noremoteplayback noplaybackrate" 
+          disablePictureInPicture="true"
+          v-if="props.urlArr"
+        ></video>
+        <div class="list">
+          <div><Avatar/></div>
+          <div><Like/></div>
+          <div><Comment/></div>
+          <div><Collect/></div>
+          <div><Share/></div>
+          <div><More/></div>
+        </div>
+        <canvas id='mycanvas'></canvas>
+      </div>
+      <div class="left">
+        <video 
+          preload
+          playsinline="true"
+          :src="props.urlArr[props.index+1]" 
+          controls="controls" 
+          type="video/mp4"
+          muted
+          controlsList="nodownload  noremoteplayback noplaybackrate" 
+          disablePictureInPicture="true"
+          v-if="props.urlArr"
+        ></video>
+      </div>
     </div>
+    
     <div class="right">
       <span class="iconfont icon-jiantoushang" @click="last()"></span>
       <span class="iconfont icon-jiantouxia" @click="next()"></span>
@@ -85,16 +113,27 @@ const findvideocover = () =>{
 <style lang="scss" scoped>
   @media screen and (max-width :375px){
     .main{
-      .left{
+      .video{
         width: 100% !important;
-        height: 100vh - 6vh  !important;
+        height: 100vh - 6vh !important;
       }
       .right{
         display: none;
       }
-    }
-    
-    
+    }  
+}
+@media screen and (max-width :876px){
+    .main{
+      .video{
+        .left{
+          &:nth-child(2){
+            .list{
+              display: none;
+            }
+          }
+        }
+      }
+    }  
 }
 
 
@@ -104,15 +143,25 @@ const findvideocover = () =>{
   display: flex;
   align-items: center;
   overflow: hidden;
-  .left{
-    position: relative;
+  .video{
+    display: flex;
+    flex-direction: column;
     width: 95%;
     height: 100%;
-    border-radius: 20px;
-    border: none;
-    background-color: rgba(0, 0, 0, 0.3); 
-    overflow: hidden;
 
+    
+    .left{
+
+      position: relative;
+      border-radius: 20px;
+      border: none;
+      background-color: rgba(0, 0, 0, 0.3); 
+      overflow: hidden;
+      
+      &:nth-child(2){
+        height: 100%;
+        width: 100%;
+      }
     .list{
       height: 60%;
       position: absolute;
@@ -120,7 +169,7 @@ const findvideocover = () =>{
       flex-direction: column;
       justify-content: space-around;
       align-items: center;
-      margin-right: 40px;
+      margin-right: 30px;
       right: 0;
       top: 25%;
       transform: translateX(-50%);
@@ -162,6 +211,9 @@ const findvideocover = () =>{
       }
     
     } 
+  }
+
+
   }
   .right{
     height: 100px;

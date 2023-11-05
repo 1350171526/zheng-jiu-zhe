@@ -1,0 +1,33 @@
+var express = require('express');
+var router = express.Router();
+var qiniu = require("qiniu");
+var accessKey = 'h6BkfhZ-X2xcGqz-qcy7J5FFoo5zuHr8me1e_Nw1';
+var secretKey = 'gzwDa0e4EgwUPVx3FzuvF05mw-kQJv8V6T9WUiBD';
+var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
+/* GET users listing. */
+router.get('/upload', function(req, res, next) {
+  var options = {
+    scope: 'zheng-jiu-zhe/video',
+  };
+  var putPolicy = new qiniu.rs.PutPolicy(options);
+  var token=putPolicy.uploadToken(mac);
+  res.send(token);
+});
+router.get('/upload/hot', function(req, res, next) {
+  var options = {
+    scope: 'zheng-jiu-zhe/hot',
+  };
+  var putPolicy = new qiniu.rs.PutPolicy(options);
+  var token=putPolicy.uploadToken(mac);
+  res.send(token);
+});
+router.get('/upload/music', function(req, res, next) {
+  var options = {
+    scope: 'zheng-jiu-zhe/music',
+  };
+  var putPolicy = new qiniu.rs.PutPolicy(options);
+  var token=putPolicy.uploadToken(mac);
+  res.send(token);
+});
+
+module.exports = router;

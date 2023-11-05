@@ -1,12 +1,29 @@
 <script setup>
-let number = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
+import { inject,ref, watch } from "vue"
+const change = inject('change')
+let number = ref()
+number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 
+watch(change, () => {  
+  isSelect.value=false
+  number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
+});  
+
+const isSelect = ref(false)
+const like = () =>{
+  if(isSelect.value){
+    number.value--
+  }else{
+    number.value++
+  }
+  isSelect.value = !isSelect.value 
+}
 </script>
 
 <template>
   <div class="group">
-    <div class="collect">
-      <text class="iconfont icon-shoucang"></text>
+    <div class="collect" @click="like">
+      <text class="iconfont icon-shoucang" :class="isSelect ? 'select' : 'noselect'"></text>
       {{ number }}
     </div>
     <div class="layer">
@@ -32,10 +49,14 @@ let number = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
     align-items: center;
     flex-direction: column;
     &:hover{
-      .iconfont{
+      .noselect{
         animation: mymove 0.5s ease;
         animation-fill-mode: forwards;
       }
+    }
+    .select{
+      animation: click 0.5s ease;
+      animation-fill-mode: forwards;
     }
   }
   text{
