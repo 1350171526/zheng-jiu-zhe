@@ -9,19 +9,14 @@ import Upload from "@/views/HeaderList/Upload.vue"
 import Topup from "@/views/HeaderList/Topup.vue"
 
 
-/* const showLoginDialog = ref(false);
-const dialogVisible = () => {
-  showLoginDialog.value = !showLoginDialog.value
-  console.log(showLoginDialog.value);
-}; */
+import {HeaderStateStore} from "@/stores/HeaderState.js"
+const HeaderState= HeaderStateStore()
 
 const showLoginDialog = ref(false);
 
 const closeDialog = (msg) => {
   showLoginDialog.value = msg;
 };
-
-
 
 
 
@@ -95,7 +90,8 @@ const onWindowResize = () => {
         <Upload></Upload>
       </div> 
       <div class="item avatar" @click="showLoginDialog = !showLoginDialog" >
-        <img src="../../../assets/images/avatat.png" alt=""  >
+        <img src="../../../assets/images/avatat.png" alt="" v-if="!HeaderState.isLogin">
+        <div v-else>登录</div>
       </div>
     </div>
   </div>
@@ -249,10 +245,24 @@ const onWindowResize = () => {
         width: 30px;
         height: 30px;
         border-radius: 50%;
-      }
-      :hover{
+        &:hover{
         transform: scale(1.2);
-    }
+        }
+      }
+      div{
+        color: #fff;
+        width: 70px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 15px;
+        border-radius: 10px;
+        background-color: #fe2c55;
+        text-align: center;
+        &:hover{
+          background-color: #d21b46;
+        }
+      }
+      
     }
     
     .item{

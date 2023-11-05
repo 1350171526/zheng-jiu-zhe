@@ -144,7 +144,7 @@ center
 </template>
 
 
-<style lang="scss" >
+<style lang="scss">
 
 
 
@@ -154,7 +154,11 @@ center
  border-radius: 10px;
  width: 400px;
 }
+.el-dialog__header{
+  cursor: default;
+}
  .el-dialog__title {
+    cursor: default;
     color: #fff;
     font-size: 45px;
     font-weight:500;

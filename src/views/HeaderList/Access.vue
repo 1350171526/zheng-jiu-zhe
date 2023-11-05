@@ -12,14 +12,14 @@
             <span class="four">立即添加</span>
           </div>
           <div class="dropdown-item middle" >
-            <span class="iconfont icon-xiazai"></span>
+            <span class="iconfont icon-shijianchajian"></span>
             <div class="Mad">
               <span>七牛浏览器插件</span>
               <span style="color: #464850; font-size: 12px;">点击下载插件</span>
             </div>
           </div>
           <div class="dropdown-item down">
-            <span class="iconfont icon-xiazai"></span>
+            <span class="iconfont icon-shoucangjia"></span>
             <div class="Mad">
               <span>添加网页收藏夹</span>
               <span style="color: #464850; font-size: 12px;">点击添加七牛至收藏夹</span>

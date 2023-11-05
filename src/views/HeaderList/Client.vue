@@ -6,15 +6,15 @@
         <div class="dropdown-content" >
           <!-- 下拉菜单内容 -->
           <div class="dropdown-item">
-            <span class="iconfont icon-xiazai"></span>
+            <span class="iconfont icon-bofang"></span>
             <div>高清流畅播放</div>
           </div>
           <div class="dropdown-item">
-            <span class="iconfont icon-xiazai"></span>
+            <span class="iconfont icon-tongzhi"></span>
             <div>好友消息通知</div>
           </div>
           <div class="dropdown-item">
-            <span class="iconfont icon-xiazai"></span>
+            <span class="iconfont icon-zhuomianguanli"></span>
             <div>桌面便捷访问</div>
           </div>
           <div class="dropdown-item" style="background-color:#ff2c55;border-radius: 0 0 10px 10px; ">

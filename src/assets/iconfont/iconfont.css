@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4300953 */
-  src: url('./iconfont.woff2?t=1698979970256') format('woff2'),
-       url('./iconfont.woff?t=1698979970256') format('woff'),
-       url('./iconfont.ttf?t=1698979970256') format('truetype');
+  src: url('./iconfont.woff2?t=1699193188807') format('woff2'),
+       url('./iconfont.woff?t=1699193188807') format('woff'),
+       url('./iconfont.ttf?t=1699193188807') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,26 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-bofang:before {
+  content: "\e8a3";
+}
+
+.icon-tongzhi:before {
+  content: "\e728";
+}
+
+.icon-shijianchajian:before {
+  content: "\e62f";
+}
+
+.icon-zhuomianguanli:before {
+  content: "\e638";
+}
+
+.icon-shoucangjia:before {
+  content: "\e60a";
 }
 
 .icon-jurassic_user:before {
