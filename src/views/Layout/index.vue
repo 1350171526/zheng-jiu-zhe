@@ -36,14 +36,7 @@ const changeVideo = (e) =>{
     nextVedio()
   }
 }
-// 鼠标滚轮事件
-const mousewheel = (e) =>{
-  if(e.deltaY>0){
-    nextVedio()
-  }else if(e.deltaY<0){
-    lastVedio()
-  }
-}
+
 let change = ref(false)
 // 下一个视频
 let index = ref(0)
@@ -155,7 +148,6 @@ const clickHot = () =>{
           :index="index" 
           @lastVedio="lastVedio()" 
           @nextVedio="nextVedio()"
-          @mousewheel="mousewheel"
           >
           </Main>
         </el-main>
