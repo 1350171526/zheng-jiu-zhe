@@ -5,6 +5,7 @@ import Client from "@/views/HeaderList/Client.vue"
 import Access from "@/views/HeaderList/Access.vue"
 import Message from "@/views/HeaderList/Message.vue"
 import Notice from "@/views/HeaderList/Notice.vue"
+import Upload from "@/views/HeaderList/Upload.vue"
 
 
 /* const showLoginDialog = ref(false);
@@ -90,10 +91,8 @@ const onWindowResize = () => {
         
         <Message></Message>
       </div>
-      <div class="item">
-        
-        <span class="iconfont icon-zengjia"></span>
-        <div>投稿</div>
+      <div class="item"> 
+        <Upload></Upload>
       </div> 
       <div class="item avatar" @click="showLoginDialog = !showLoginDialog" >
         <img src="../../../assets/images/avatat.png" alt=""  >
@@ -266,7 +265,7 @@ const onWindowResize = () => {
       justify-content: center;
       margin-right: 10px;
     }
-    :hover{
+    .item:hover{
        color: #fff;
         cursor: pointer;
     }

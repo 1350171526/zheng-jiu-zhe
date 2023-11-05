@@ -109,8 +109,6 @@ modal
 :close-on-click-modal = clickModal
 @close="closeDialog"
 > 
-
-
 <div v-if="isPasswordLogin">
     <el-form
     v-if="true"
