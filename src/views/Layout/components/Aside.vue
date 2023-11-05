@@ -15,6 +15,8 @@
 </template>
 
 <script setup>
+import { ElMessage } from 'element-plus'
+import 'element-plus/theme-chalk/el-message.css'
 import { ref,defineEmits  } from "vue"
 const activeindex = ref(0)
  const State = ref([
@@ -36,12 +38,15 @@ const switchType = (item,index) =>{
   activeindex.value = index
   if(item.id==1){
     emit('getVedio')
-  }
-  if(item.id==2){
+  }else if(item.id==2){
     emit('getMusic')
-  }
-  if(item.id==3){
+  }else if(item.id==3){
     emit('getHot')
+  }else{
+    ElMessage({
+      type: 'success',
+      message: '敬请期待'
+    })
   }
 }
 </script>

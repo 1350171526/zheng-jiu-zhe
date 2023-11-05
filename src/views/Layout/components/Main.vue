@@ -28,6 +28,15 @@ const last = () =>{
 const next = () =>{
   emit('nextVedio')
 }
+// 鼠标滚轮事件
+const mousewheel = (e) =>{
+  if(e.deltaY>0){
+    emit('nextVedio')
+  }else if(e.deltaY<0){
+    emit('lastVedio')
+  }
+}
+// canvas绘制视频第一帧作为视频空白区域背景
 const findvideocover = () =>{
     const  video = document.getElementById("upvideo"); 
     var canvas = document.getElementById('mycanvas') 
@@ -49,7 +58,7 @@ const findvideocover = () =>{
 
 <template>
   <div class="main">
-    <div class="video">
+    <div class="video" @mousewheel="mousewheel">
       <div class="left">
         <video 
           playsinline="true"

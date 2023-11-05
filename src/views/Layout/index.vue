@@ -36,14 +36,7 @@ const changeVideo = (e) =>{
     nextVedio()
   }
 }
-// 鼠标滚轮事件
-const mousewheel = (e) =>{
-  if(e.deltaY>0){
-    nextVedio()
-  }else if(e.deltaY<0){
-    lastVedio()
-  }
-}
+
 let change = ref(false)
 // 下一个视频
 let index = ref(0)
@@ -102,18 +95,7 @@ const lastVedio = () =>{
   }
   lastTigger = now
 }
-// 获取音乐分类视频
-const getMusic =async () =>{
-  type.value = "music"
-  const res = await getMusicApi()
-  urlArr.value = res.data.vedioArr
-}
-// 获取热门视频
-const getHot =async () =>{
-  type.value = "hot"
-  const res = await getHotApi()
-  urlArr.value = res.data.vedioArr
-}
+
 // 点击首页全部视频
 const clickVideo = () =>{
   urlArr.value = []
@@ -121,16 +103,20 @@ const clickVideo = () =>{
   getVedio()
 }
 // 点击音乐视频
-const clickMusic = () =>{
+const clickMusic =async () =>{
   urlArr.value = []
   index.value = 0
-  getMusic()
+  type.value = "music"
+  const res = await getMusicApi()
+  urlArr.value = res.data.vedioArr
 }
 // 点击热门视频
-const clickHot = () =>{
+const clickHot =async () =>{
   urlArr.value = []
   index.value = 0
-  getHot()
+  type.value = "hot"
+  const res = await getHotApi()
+  urlArr.value = res.data.vedioArr
 }
 
 
@@ -155,7 +141,6 @@ const clickHot = () =>{
           :index="index" 
           @lastVedio="lastVedio()" 
           @nextVedio="nextVedio()"
-          @mousewheel="mousewheel"
           >
           </Main>
         </el-main>
