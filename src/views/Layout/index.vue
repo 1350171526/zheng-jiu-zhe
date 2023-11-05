@@ -95,18 +95,7 @@ const lastVedio = () =>{
   }
   lastTigger = now
 }
-// 获取音乐分类视频
-const getMusic =async () =>{
-  type.value = "music"
-  const res = await getMusicApi()
-  urlArr.value = res.data.vedioArr
-}
-// 获取热门视频
-const getHot =async () =>{
-  type.value = "hot"
-  const res = await getHotApi()
-  urlArr.value = res.data.vedioArr
-}
+
 // 点击首页全部视频
 const clickVideo = () =>{
   urlArr.value = []
@@ -114,16 +103,20 @@ const clickVideo = () =>{
   getVedio()
 }
 // 点击音乐视频
-const clickMusic = () =>{
+const clickMusic =async () =>{
   urlArr.value = []
   index.value = 0
-  getMusic()
+  type.value = "music"
+  const res = await getMusicApi()
+  urlArr.value = res.data.vedioArr
 }
 // 点击热门视频
-const clickHot = () =>{
+const clickHot =async () =>{
   urlArr.value = []
   index.value = 0
-  getHot()
+  type.value = "hot"
+  const res = await getHotApi()
+  urlArr.value = res.data.vedioArr
 }
 
 
