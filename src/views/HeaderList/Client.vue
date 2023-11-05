@@ -17,7 +17,7 @@
             <span class="iconfont icon-xiazai"></span>
             <div>桌面便捷访问</div>
           </div>
-          <div class="dropdown-item" style="background-color: red;border-radius: 0 0 10px 10px; ">
+          <div class="dropdown-item" style="background-color:#ff2c55;border-radius: 0 0 10px 10px; ">
             <div>下载电脑客户端</div>
           </div>
         </div>

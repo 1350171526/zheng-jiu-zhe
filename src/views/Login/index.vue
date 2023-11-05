@@ -177,6 +177,7 @@ modal
 
 
 <style lang="scss" scoped>
+
 .custom_button{
   color: #7f8083 !important;
 

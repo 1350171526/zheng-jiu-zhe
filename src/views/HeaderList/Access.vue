@@ -6,7 +6,7 @@
         <div class="dropdown-content" >
           <!-- 下拉菜单内容 -->
           <div class="dropdown-item-up">
-            <span class="one"><img src="@/assets/logo.svg" alt="" width="45px" height="45px"></span>
+            <span class="one"><img src="/src/assets/images/logo.png" alt="" width="45px" height="45px"></span>
             <span class="two">添加七牛到电脑桌面</span>
             <span class="three">下次可以在桌面快捷访问七牛</span>
             <span class="four">立即添加</span>
@@ -14,7 +14,7 @@
           <div class="dropdown-item middle" >
             <span class="iconfont icon-xiazai"></span>
             <div class="Mad">
-              <span>抖音浏览器插件</span>
+              <span>七牛浏览器插件</span>
               <span style="color: #464850; font-size: 12px;">点击下载插件</span>
             </div>
           </div>
@@ -65,7 +65,7 @@
         left: -50px;
         border-left: 10px;
         min-width: 230px;
-        background-color:#102543; 
+        background-color:#102543;
         opacity: 1;
         transition: all 0.2s 0.2s;
         transform: translateY(-100px) scale(1, 0);
@@ -78,7 +78,8 @@
           width: 100%;
           height: 190px;
           border-radius: 10px;
-          background-color: #252632;
+          background-color:#102543;
+         
           span{
             padding: 5px;
           }
@@ -109,7 +110,7 @@
           color: #fff;
           width: 100%;
           height: 60px;
-          background-color: #161823;
+          background-color:  #252632;
           .iconfont{
             padding-right: 10px;
           }
@@ -124,7 +125,7 @@
 
         }
         .down{
-          border-radius: 0 10px 10px ;
+          border-radius:0 0 10px 10px ;
         }
       }
 </style>

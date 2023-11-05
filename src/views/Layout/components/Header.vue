@@ -4,6 +4,7 @@ import Login from "@/views/Login/index.vue";
 import Client from "@/views/HeaderList/Client.vue"
 import Access from "@/views/HeaderList/Access.vue"
 import Message from "@/views/HeaderList/Message.vue"
+import Notice from "@/views/HeaderList/Notice.vue"
 
 
 /* const showLoginDialog = ref(false);
@@ -81,8 +82,8 @@ const onWindowResize = () => {
         </div>
       </div>
       <div class="item"> 
-        <span class="iconfont icon-tishi"></span>
-        <div>通知</div>
+        
+        <Notice></Notice>
       </div>
       <div class="item">
         
