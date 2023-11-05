@@ -8,11 +8,12 @@
       上传
     </button> -->
   <el-dialog v-model="centerDialogVisible" title="点击按钮上传" width="30%" center>
+
     
-    <form action="file" @click="upload"></form>
+    <input type="file" ref="file">
     <template #footer>
       <span class="dialog-footer">
-        <el-button type="primary" @click="centerDialogVisible = false">
+        <el-button type="primary" @click="upload">
           上传
         </el-button>
         <el-button @click="centerDialogVisible = false">退出</el-button>
@@ -24,6 +25,7 @@
 </template>
 
 <script setup>
+import { upload } from "qiniu-js";
 import { ref } from "vue";
 
 
