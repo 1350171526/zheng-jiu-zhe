@@ -1,7 +1,8 @@
 <script setup>
 import { ref} from "vue";
 import { ElMessage } from 'element-plus';
-
+import {HeaderStateStore} from "@/stores/HeaderState.js"
+const HeaderState= HeaderStateStore()
 
 
 
@@ -66,6 +67,7 @@ const doLogin = () => {
       formRef.value.validate((valid) => {  
         if (valid) {  
           alert('登录成功');  
+          HeaderState.isLogin=!HeaderState.isLogin
           dialogFormVisible.value=!dialogFormVisible.value
         } else {  
           alert('登录失败');  
@@ -103,48 +105,50 @@ const changePasswordLogin=() => {
   
   <el-dialog    
  v-model="dialogFormVisible"
-title="账户登录"  
+title="Login"  
 width="30%"  
 modal
 :close-on-click-modal = clickModal
 @close="closeDialog"
+center
 > 
 <div v-if="isPasswordLogin">
     <el-form
     v-if="true"
-            ref="formRef"
-              :model="form"
-              :rules="rules"
-              label-position="right"
-              label-width="70px"
-              status-icon 
-            >
-              <el-form-item prop="account" label="账号">
-                <el-input v-model="form.account" placeholder="请输入手机号" />
-                
-              </el-form-item>
-              <el-form-item prop="password" label="密码">
-                <el-input  v-model="form.password" placeholder="请输入密码" />
-              </el-form-item>
-              <el-form-item label-width="22px" prop="agree">
-                <el-checkbox size="large" v-model="form.agree">
-                  我已同意隐私条款和服务条款
-                </el-checkbox>
-              </el-form-item>
-            </el-form>
-          </div>
-          <!-- 短信验证 -->
-          <div v-else>
-         <el-form
-        v-if="true"
-            ref="formRef"
-              :model="form"
-              :rules="rules"
-              label-position="right"
-              label-width="70px"
-              status-icon 
-        >
-        <el-form-item prop="account" label="账号">
+    ref="formRef"
+    :model="form"
+    :rules="rules"
+    label-position="right"
+    label-width="70px"
+    status-icon 
+    >
+      <el-form-item prop="account" label="账号">
+        <el-input v-model="form.account" placeholder="请输入手机号" />
+        
+      </el-form-item>
+      <el-form-item prop="password" label="密码">
+        <el-input  v-model="form.password" placeholder="请输入密码" />
+      </el-form-item>
+      <el-form-item label-width="22px" prop="agree">
+        <el-checkbox size="large" v-model="form.agree">
+          我已同意隐私条款和服务条款
+        </el-checkbox>
+      </el-form-item>
+    </el-form>
+  </div>
+  <!-- 短信验证 -->
+  <div v-else>
+  <el-form
+    v-if="true"
+    ref="formRef"
+    :model="form"
+    :rules="rules"
+    label-position="right"
+    label-width="70px"
+    status-icon 
+      
+>
+        <el-form-item prop="account" label="账号" >
           <el-input  v-model="form.account" placeholder="请输入手机号" >
             <template #append>
               <el-button  @click="sendSmsVerification" :disabled="isSendingSms">
@@ -174,7 +178,53 @@ modal
 </template>
 
 
-<style lang="scss" scoped>
+<style lang="scss" >
+/* .el-dialog{
+  background-color: #102844;
+  
+.el-dialog__header{
+  
+  .el-dialog__title {
+            color: white;
+        }
+}
+} */
+
+
+
+.el-dialog {
+ background-color: #102844;
+ box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.7);
+}
+ .el-dialog__title {
+color: #fff;
+font-size: 45px;
+font-weight:500;
+text-shadow: 3px 2px 5px rgba(255, 255, 255, 0.7);
+ }
+ .el-dialog__header{
+
+ }
+ .el-form-item__label{
+  color: rgb(255, 255, 255);
+
+ }
+ .el-dialog__body{
+
+ }
+ .el-form-item__content{
+
+ }
+ .planTitle {
+
+ }
+ .planContent {
+
+ }
+.el-button--primary {
+
+}
+
 
 .custom_button{
   color: #7f8083 !important;

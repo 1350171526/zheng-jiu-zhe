@@ -1,7 +1,12 @@
 <!-- 私信 -->
+<script setup>
+import {HeaderStateStore} from "@/stores/HeaderState.js"
+const HeaderState=HeaderStateStore()
+
+</script>
 
 <template>
-  <div class="Message">
+  <div class="Message" v-if="HeaderState.isLogin">
     <span class="iconfont icon-weixin"></span>
         <div>私信</div>
         <div class="dropdown-content" >
@@ -15,14 +20,41 @@
           </div>
         </div>
         
+  </div>
 
+
+    <!-- 登录后显示的页面 -->
+    <div class="group" v-else>
+    <div class="share">
+      <span class="iconfont icon-weixin"></span>
+        <div>私信</div>
+    </div>
+    
+    <div class="layer">
+      <span class="top">
+        <div>私信</div>
+      </span>
+      <span class="middle">
+        <span class="share">给好友发消息</span>
+        <div class="item" v-for="item in 6" :key="item">
+          <div class="left">
+            <div class="icon">
+              <text class="iconfont icon-jurassic_user"></text>
+            </div>
+            <span>用户{{ item }}</span>
+          </div>
+          <div class="right">
+            <span>私信</span>
+          </div>
+        </div>
+      </span>
+      
+    </div>
   </div>
     
 </template>
 
-<script setup>
 
-</script>
 
 <style lang="scss" scoped>
 .Message{
@@ -73,46 +105,120 @@
           }
         }
       }
+
+
+
+
+      //登录之后的样式
+      .group{
+  position: relative;
+  cursor: pointer;
+  .share{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+  }
+  text{
+    height: 30px;
+    font-size: 25px;
+  }
+  &:hover{
+    .layer{
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .layer{
+    z-index: 999;
+    width: 300px;
+    height: 470px;
+    opacity: 0;
+    display: flex;
+    top: 50px;
+    left: -190px;
+    flex-direction: column;
+    position: absolute;
+    transition: all 0.2s 0.2s;
+    transform: translateY(-100px) scale(1, 0);
+    white-space: nowrap;
+    bottom: 5px;
+    right: 150%;
+    background-color: #0F2743;
+    border-radius: 5px;
+    padding: 10px 20px;
+    box-shadow: -5px -5px 15px  rgba(0,0,0,0.8);
+    cursor: auto;
+    .top{
+      width: 100%;
+      height: 30px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #b1b1b6;
       
-/* .Client {
-      position: relative;
-      z-index: 600;
-      justify-content: center;
+      display: flex;
       align-items: center;
-      &:hover{
-        .dropdown-content{
-          opacity:1;
-          transform: none;
+      border-radius: 5px;
+
+      span{
+        margin: 0 10px;
+        &:nth-child(2){
+          margin-right: 10px;
         }
       }
-      .dropdown-content {
-        z-index: 999 ;
-        position: absolute;
-        top: 50px;
-        left: 0px;
-        border-left: 10px;
-        background-color:#102543; 
-        opacity: 0;
-        transition: all 0.4s 0.2s;
-        transform: translateY(-200px) scale(1, 0);
-        border-radius: 4px;
-        .dropdown-item{
+      input{
+        background-color:transparent;
+        border: none;
+        outline: none;
+        caret-color: red;
+
+      }
+    }
+    .middle{
+      border-top: rgba(57, 57, 63, 0.8) solid 1px;
+      padding: 10px 0;
+      overflow: auto;
+      &::-webkit-scrollbar {display:none}
+
+      
+      .item{
+        margin-top: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .left{
           display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items:center;
-          color: #fff;
-          width: 100%;
-          height: 50px;
-          line-height: 50px;
-          padding-left: 10px;
+          align-items: center;
+          
+          .icon{
+            width: 40px;
+            height: 40px;
+            background-color: #1296db;
+            border-radius: 50%;
+            margin-right: 15px;
+            text-align: center;
+          }
+          
+        }
+        .right{
+          background-color: #FE2C55;
+          padding: 5px 20px;
+          border-radius: 5px;
+          cursor: pointer;
           &:hover{
-            background-color:rgba(37, 38, 50); 
+            background-color: #D21B46;
+
           }
         }
       }
-    } */
-
+    }
+    
+  }
+}
+      
 
   
 

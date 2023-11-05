@@ -82,49 +82,6 @@
           }
         }
       }
-      
-/* .Client {
-      position: relative;
-      z-index: 600;
-      justify-content: center;
-      align-items: center;
-      &:hover{
-        .dropdown-content{
-          opacity:1;
-          transform: none;
-        }
-      }
-      .dropdown-content {
-        z-index: 999 ;
-        position: absolute;
-        top: 50px;
-        left: 0px;
-        border-left: 10px;
-        background-color:#102543; 
-        opacity: 0;
-        transition: all 0.4s 0.2s;
-        transform: translateY(-200px) scale(1, 0);
-        border-radius: 4px;
-        .dropdown-item{
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items:center;
-          color: #fff;
-          width: 100%;
-          height: 50px;
-          line-height: 50px;
-          padding-left: 10px;
-          &:hover{
-            background-color:rgba(37, 38, 50); 
-          }
-        }
-      }
-    } */
-
-
-  
-
 </style>
 
 
