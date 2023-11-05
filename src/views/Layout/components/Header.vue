@@ -6,6 +6,7 @@ import Access from "@/views/HeaderList/Access.vue"
 import Message from "@/views/HeaderList/Message.vue"
 import Notice from "@/views/HeaderList/Notice.vue"
 import Upload from "@/views/HeaderList/Upload.vue"
+import Topup from "@/views/HeaderList/Topup.vue"
 
 
 /* const showLoginDialog = ref(false);
@@ -60,8 +61,7 @@ const onWindowResize = () => {
     </div>
     <div class="right">
       <div class="item" >
-        <span class="iconfont icon-yulebao"></span>
-        <div>充牛币</div>
+        <Topup></Topup>
       </div>
       <div class="item" >
         
