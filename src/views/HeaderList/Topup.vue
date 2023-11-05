@@ -52,7 +52,7 @@
         left: -50px;
         border-left: 10px;
         min-width: 220px;
-        background-color:#102543; 
+        background-color:#0f2340; 
         opacity: 0;
         transition: all 0.2s 0.2s;
         transform: translateY(0px) scale(1, 0);

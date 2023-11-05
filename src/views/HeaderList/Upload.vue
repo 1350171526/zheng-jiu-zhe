@@ -51,7 +51,7 @@
         left: -80px;
         border-left: 10px;
         min-width: 160px;
-        background-color:#102543; 
+        background-color:#0f2340; 
         opacity: 0;
         transition: all 0.2s 0.2s;
         transform: translateY(-100px) scale(1, 0);
@@ -72,7 +72,7 @@
   
 &> div:not(.clickable) {  
   cursor: not-allowed; 
-  background-color:#102543 !important;
+  background-color:#0f2340 !important;
 
 }
           div{

@@ -226,7 +226,7 @@ const onWindowResize = () => {
         left: 0px;
         border-left: 10px;
         min-width: 120px;
-        background-color:#102543; 
+        background-color:#0f2340; 
         opacity: 0;
         transition: all 0.4s 0.2s;
         transform: translateY(-200px) scale(1, 0);

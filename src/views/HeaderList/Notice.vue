@@ -84,7 +84,7 @@ const HeaderState=HeaderStateStore()
         left: -50px;
         border-left: 10px;
         min-width: 160px;
-        background-color:#102543; 
+        background-color:#0f2340; 
         opacity: 0;
         transition: all 0.2s 0.2s;
         transform: translateY(-100px) scale(1, 0);
@@ -147,10 +147,9 @@ const HeaderState=HeaderStateStore()
     white-space: nowrap;
     bottom: 5px;
     right: 150%;
-    background-color: #0F2743;
+    background-color:#0f2340;
     border-radius: 5px;
     padding: 10px 20px;
-    box-shadow: -5px -5px 15px  rgba(0,0,0,0.8);
     cursor: auto;
     .top{
       width: 100%;

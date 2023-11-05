@@ -65,7 +65,7 @@
         left: -50px;
         border-left: 10px;
         min-width: 230px;
-        background-color:#102543;
+        background-color:#0f2340;
         opacity: 1;
         transition: all 0.2s 0.2s;
         transform: translateY(-100px) scale(1, 0);
@@ -78,7 +78,6 @@
           width: 100%;
           height: 190px;
           border-radius: 10px;
-          background-color:#102543;
          
           span{
             padding: 5px;

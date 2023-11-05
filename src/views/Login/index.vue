@@ -66,11 +66,12 @@ const formRef = ref(null);
 const doLogin = () => {  
       formRef.value.validate((valid) => {  
         if (valid) {  
-          alert('登录成功');  
+          ElMessage.success('登录成功');  
+          
           HeaderState.isLogin=!HeaderState.isLogin
           dialogFormVisible.value=!dialogFormVisible.value
         } else {  
-          alert('登录失败');  
+          ElMessage.error('登录失败');  
           return false;  
         }  
       });  
@@ -85,13 +86,6 @@ const closeDialog = () => {
 }
 
 
-//点击显示短信验证并且切换
-const isPasswordLogin=ref(true)
-const changePasswordLogin=() => {
-  isPasswordLogin.value=!isPasswordLogin.value
-  //切换时清空表单gu
-  form.value.password=''
-}
 
 
 
@@ -112,7 +106,7 @@ modal
 @close="closeDialog"
 center
 > 
-<div v-if="isPasswordLogin">
+<div >
     <el-form
     v-if="true"
     ref="formRef"
@@ -122,6 +116,7 @@ center
     label-width="70px"
     status-icon 
     >
+      
       <el-form-item prop="account" label="账号">
         <el-input v-model="form.account" placeholder="请输入手机号" />
         
@@ -136,40 +131,11 @@ center
       </el-form-item>
     </el-form>
   </div>
-  <!-- 短信验证 -->
-  <div v-else>
-  <el-form
-    v-if="true"
-    ref="formRef"
-    :model="form"
-    :rules="rules"
-    label-position="right"
-    label-width="70px"
-    status-icon 
-      
->
-        <el-form-item prop="account" label="账号" >
-          <el-input  v-model="form.account" placeholder="请输入手机号" >
-            <template #append>
-              <el-button  @click="sendSmsVerification" :disabled="isSendingSms">
-                {{ isSendingSms ? '发送中...' : '短信验证' }}
-             </el-button>
-             </template>
-             </el-input>
-           </el-form-item>
-              <el-form-item prop="password" label="验证码">
-                <el-input  v-model="form.authcode" placeholder="请输入短信"/>
-              </el-form-item>
-              <el-form-item label-width="22px" prop="agree">
-                <el-checkbox size="large" v-model="form.agree">
-                  我已同意隐私条款和服务条款
-                </el-checkbox>
-              </el-form-item>
-        </el-form>
-      </div>
+ 
+
      <template #footer>    
        <span class="dialog-footer">    
-        <el-button   class="custom_button"  @click="changePasswordLogin">{{ isPasswordLogin?'短信登录':'密码登录' }}</el-button> 
+        
          <el-button @click="closeDialog">退出</el-button>    
          <el-button type="primary" @click="doLogin">登录</el-button>    
        </span>    
@@ -179,71 +145,50 @@ center
 
 
 <style lang="scss" >
-/* .el-dialog{
-  background-color: #102844;
-  
-.el-dialog__header{
-  
-  .el-dialog__title {
-            color: white;
-        }
-}
-} */
 
 
 
 .el-dialog {
  background-color: #102844;
  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.7);
+ border-radius: 10px;
+ width: 400px;
 }
  .el-dialog__title {
-color: #fff;
-font-size: 45px;
-font-weight:500;
-text-shadow: 3px 2px 5px rgba(255, 255, 255, 0.7);
- }
- .el-dialog__header{
+    color: #fff;
+    font-size: 45px;
+    font-weight:500;
+    text-shadow: -3px 2px 5px rgba(255, 255, 255, 0.7);
+  }
 
- }
  .el-form-item__label{
   color: rgb(255, 255, 255);
-
  }
+
  .el-dialog__body{
-
+  padding-bottom: 0px !important;
  }
- .el-form-item__content{
 
- }
- .planTitle {
-
- }
- .planContent {
-
- }
-.el-button--primary {
-
-}
 
 
 .custom_button{
   color: #7f8083 !important;
 
-  background-color: #ffffff; /* 设置按钮的颜色 */
+  background-color: #ffffff; 
   color: #fff;
 }
-/* 点击时保持颜色不变 */
+
 .custom_button:hover {
   color: #fff;
-  background-color: #ffffff !important; /* 点击时保持颜色不变 */
+  background-color: #ffffff !important; 
 }
-/* 点击时保持颜色不变 */
+
 .custom_button:active {
-  background-color: #ffffff !important; /* 点击时保持颜色不变 */
+  background-color: #ffffff !important; 
 }
 .custom_button:focus {
   color: #fff;
-  background-color: #ffffff !important; /* 点击时保持颜色不变 */
+  background-color: #ffffff !important; 
 }
 
 </style>
