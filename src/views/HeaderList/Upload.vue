@@ -1,23 +1,68 @@
 <!-- 上传 -->
 <script setup>
-import { ElLoading } from 'element-plus'
+import {uploadVedioApi} from '@/apis/upload'
+import * as qiniu from 'qiniu-js'
+import { ElLoading, ElMessage } from 'element-plus'
 import { ref } from "vue";
+
+
 const dialogVisible = ref(false)
-
-
+const file = ref(null)
 const fullscreenLoading = ref(false)
-const openFullScreen1 = () => {
-  const loading = ElLoading.service({
-    lock: true,
-    text: '上传中',
-    background: 'rgba(0, 0, 0, 0.7)',
-  })
-  setTimeout(() => {
-    loading.close()
-  }, 2000)
+let progress = ref(0)
+const fileName = ref('')
+
+// 监听file的变化
+const change = () =>{
+  fileName.value = file.value.files[0].name
 }
-
-
+// 点击上传视频
+const uploadFile = async() =>{
+  if(!file.value.files.length){
+    ElMessage({
+      type: 'warning',
+      message: '请选择文件'
+    })
+    return;
+  }
+  const res = await uploadVedioApi()
+  let token = res.data
+  let files = file.value.files[0]
+  let key = null
+  const putExtra = {};
+  const config = {
+    useCdnDomain: true,
+    region: qiniu.region.z1
+  };
+  const observable = qiniu.upload(files, key, token, putExtra, config)
+  const observer = {
+    next(res){
+      // ...
+      // console.log(res);
+      progress.value = res.total.percent
+      progress.value = Math.floor(progress.value)
+      fullscreenLoading.value = true 
+        if(progress.value === 100){
+          fullscreenLoading.value = false
+        }
+    },
+    error(err){
+      // ...
+      // console.log(err);
+      ElMessage({
+        type: 'error',
+        message: '上传失败'
+    })
+    },
+    complete(res){
+      // ...
+      // console.log('res');
+      ElMessage.success('上传成功')
+      dialogVisible.value = false
+    }
+  }
+  observable.subscribe(observer)
+}
 
 </script>
 
@@ -53,15 +98,21 @@ const openFullScreen1 = () => {
     :show-close="false"
   >
     <div class="upfile">
-      <input type="file" ref="file">
+      <input type="file" ref="file" @change="change()">
       <div class="box">
         +
       </div>
+      <div v-if="fileName" class="fileName">{{ fileName }}</div>
+      <div v-if="fullscreenLoading" class="progress">{{ progress }}%</div>
     </div>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">退出</el-button>
-        <el-button type="primary" v-loading.fullscreen.lock="fullscreenLoading" @click="openFullScreen1">上传</el-button>
+        <el-button type="primary" 
+        v-loading.fullscreen.lock="fullscreenLoading" 
+        @click="uploadFile"
+        element-loading-background="rgba(255,255,255,0.1)"
+        >上传</el-button>
       </span>
     </template>
   </el-dialog>
@@ -77,27 +128,39 @@ const openFullScreen1 = () => {
   cursor: default;
   display: flex;
   justify-content: center;
-  
+  margin-bottom: 30px;
   input{
     cursor: pointer;
     opacity: 0;
     width: 100px;
     height: 100px;
     position: absolute;
-    // transform: translateX(50%) translateY(50%);
+  }
+  .fileName{
+    color: grey;
+    left: 50%;
+    bottom: -30%;
+    position: absolute;
+    transform: translateX(-50%);
+  }
+  .progress{
+    color: #1277dc;
+    font-size: 20px;
+    bottom: -170%;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
   }
   .box{
     width: 100px;
     height: 100px;
     font-size: 100px;
-    // background-color: red;
     border: #b8b6b6 solid 1px;
     border-radius: 3px;
     font-weight: 10;
     line-height: 80px;
     text-align: center;
   }
-  margin-bottom: 30px;
 }
 .Client{
   position: relative;
