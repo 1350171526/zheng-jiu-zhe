@@ -6,7 +6,7 @@ import Access from "@/views/HeaderList/Access.vue"
 import Message from "@/views/HeaderList/Message.vue"
 import Notice from "@/views/HeaderList/Notice.vue"
 import Upload from "@/views/HeaderList/Upload.vue"
-import Topup from "@/views/HeaderList/Topup.vue"
+import Recharge from "@/views/HeaderList/Recharge.vue"
 
 
 import {HeaderStateStore} from "@/stores/HeaderState.js"
@@ -56,7 +56,7 @@ const onWindowResize = () => {
     </div>
     <div class="right">
       <div class="item" >
-        <Topup></Topup>
+        <Recharge></Recharge>
       </div>
       <div class="item" >
         
@@ -90,7 +90,7 @@ const onWindowResize = () => {
         <Upload></Upload>
       </div> 
       <div class="item avatar" @click="showLoginDialog = !showLoginDialog" >
-        <img src="../../../assets/images/avatat.png" alt="" v-if="!HeaderState.isLogin">
+        <img src="../../../assets/images/avatat.png" alt="" v-if="HeaderState.isLogin">
         <div v-else>登录</div>
       </div>
     </div>

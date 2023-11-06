@@ -6,7 +6,35 @@ const HeaderState=HeaderStateStore()
 </script>
 
 <template>
-  <div class="Message" v-if="HeaderState.isLogin">
+      <!-- 登录后显示的页面 -->
+      <div class="group" v-if="HeaderState.isLogin">
+      <div class="share">
+        <span class="iconfont icon-weixin"></span>
+          <div>私信</div>
+      </div>
+      
+      <div class="layer">
+        <span class="top">
+          <div>私信</div>
+        </span>
+        <span class="middle">
+          <span class="share">给好友发消息</span>
+          <div class="item" v-for="item in 6" :key="item">
+            <div class="left">
+              <div class="icon">
+                <text class="iconfont icon-jurassic_user"></text>
+              </div>
+              <span>用户{{ item }}</span>
+            </div>
+            <div class="right">
+              <span>私信</span>
+            </div>
+          </div>
+        </span>
+        
+      </div>
+  </div>
+  <div class="Message" v-else>
     <span class="iconfont icon-weixin"></span>
         <div>私信</div>
         <div class="dropdown-content" >
@@ -23,34 +51,7 @@ const HeaderState=HeaderStateStore()
   </div>
 
 
-    <!-- 登录后显示的页面 -->
-    <div class="group" v-else>
-    <div class="share">
-      <span class="iconfont icon-weixin"></span>
-        <div>私信</div>
-    </div>
-    
-    <div class="layer">
-      <span class="top">
-        <div>私信</div>
-      </span>
-      <span class="middle">
-        <span class="share">给好友发消息</span>
-        <div class="item" v-for="item in 6" :key="item">
-          <div class="left">
-            <div class="icon">
-              <text class="iconfont icon-jurassic_user"></text>
-            </div>
-            <span>用户{{ item }}</span>
-          </div>
-          <div class="right">
-            <span>私信</span>
-          </div>
-        </div>
-      </span>
-      
-    </div>
-  </div>
+
     
 </template>
 

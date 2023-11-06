@@ -7,25 +7,9 @@ const HeaderState=HeaderStateStore()
 
 
 <template>
-  <div class="Message" v-if="HeaderState.isLogin">
-    <span class="iconfont icon-tishi"></span>
-        <div>通知</div>
-        <div class="dropdown-content">
-          <!-- 下拉菜单内容 -->
-          <div class="dropdown-item">
-            <div>登录后即可查看私信消息</div>
-          </div>
-          
-          <div class="dropdown-item" style="background-color:#ff2c55;border-radius: 0 0 10px 10px; ">
-            <div>立即登录</div>
-          </div>
-        </div>
-
-  
-  </div>
   <!-- 登录后显示的页面 -->
 
-  <div class="group" v-else>
+  <div class="group" v-if="HeaderState.isLogin">
     <div class="share">
       <span class="iconfont icon-tishi"></span>
         <div>通知</div>
@@ -53,6 +37,23 @@ const HeaderState=HeaderStateStore()
       
     </div>
   </div>
+  <div class="Message" v-else>
+    <span class="iconfont icon-tishi"></span>
+        <div>通知</div>
+        <div class="dropdown-content">
+          <!-- 下拉菜单内容 -->
+          <div class="dropdown-item">
+            <div>登录后即可查看通知消息</div>
+          </div>
+          
+          <div class="dropdown-item" style="background-color:#ff2c55;border-radius: 0 0 10px 10px; ">
+            <div>立即登录</div>
+          </div>
+        </div>
+
+  
+  </div>
+  
 
     
 </template>

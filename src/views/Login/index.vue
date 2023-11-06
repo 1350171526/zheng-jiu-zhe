@@ -5,34 +5,13 @@ import {HeaderStateStore} from "@/stores/HeaderState.js"
 const HeaderState= HeaderStateStore()
 
 
-
-
-
-//模拟发送短信
-const isSendingSms = ref(false);
-
-const sendSmsVerification = () => {
-  // 模拟发送短信操作，实际操作根据您的需求来实现
-  isSendingSms.value = true;
-
-  // 模拟短信发送成功后的操作
-  setTimeout(() => {
-    // 恢复按钮状态
-    isSendingSms.value = false;
-    // 弹出提示框
-    ElMessage.success('短信发送成功');
-  }, 2000);
-};
-
-
-
 //表单校验(账户名和密码)
 const form = ref({  
-      account: '',  
-      password: '' ,
-      authcode:'',
-      agree:false
-    }); 
+  account: '',  
+  password: '' ,
+  authcode:'',
+  agree:false
+}); 
 const rules = {
   account: [{  
   required: true,  
@@ -64,51 +43,43 @@ const dialogFormVisible = ref(true)
 //获取form实例统一校验
 const formRef = ref(null); 
 const doLogin = () => {  
-      formRef.value.validate((valid) => {  
-        if (valid) {  
-          ElMessage.success('登录成功');  
-          
-          HeaderState.isLogin=!HeaderState.isLogin
-          dialogFormVisible.value=!dialogFormVisible.value
-        } else {  
-          ElMessage.error('登录失败');  
-          return false;  
-        }  
-      });  
-    }
+  formRef.value.validate((valid) => {  
+    if (valid) {  
+      ElMessage.success('登录成功');  
+      HeaderState.login()
+      closeDialog()
+    } else {  
+      ElMessage.error('登录失败');  
+      return false;  
+    }  
+  });  
+}
 
-
-const clickModal= ref(false)
+const outlogin = () =>{
+  HeaderState.outLogin()
+  closeDialog()
+  ElMessage('退出登录')
+}
 
 const emit = defineEmits(['update:visible']);
 const closeDialog = () => {
-  emit('update:visible', false); // 通过 emit 事件通知父组件关闭对话框
+  emit('update:visible', false); 
 }
-
-
-
-
-
-
-
-
-
-
 </script>
 <template>
   
-  <el-dialog    
- v-model="dialogFormVisible"
+<el-dialog  
+v-if="!HeaderState.isLogin"
+v-model="dialogFormVisible"
 title="Login"  
 width="30%"  
 modal
-:close-on-click-modal = clickModal
+:close-on-click-modal = 'false'
 @close="closeDialog"
 center
 > 
-<div >
+  <div>
     <el-form
-    v-if="true"
     ref="formRef"
     :model="form"
     :rules="rules"
@@ -116,7 +87,6 @@ center
     label-width="70px"
     status-icon 
     >
-      
       <el-form-item prop="account" label="账号">
         <el-input v-model="form.account" placeholder="请输入手机号" />
         
@@ -131,28 +101,56 @@ center
       </el-form-item>
     </el-form>
   </div>
- 
-
-     <template #footer>    
-       <span class="dialog-footer">    
-        
-         <el-button @click="closeDialog">退出</el-button>    
-         <el-button type="primary" @click="doLogin">登录</el-button>    
-       </span>    
-     </template>
-   </el-dialog>
+    <template #footer>    
+      <span class="dialog-footer">
+        <el-button @click="closeDialog">退出</el-button>    
+        <el-button type="primary" @click="doLogin">登录</el-button>    
+      </span>    
+    </template>
+</el-dialog>
+<el-dialog 
+v-else 
+v-model="dialogFormVisible"
+:close-on-click-modal = 'false'
+@close="closeDialog"
+>
+  <div class="quit">
+    <div class="outlogin" @click="outlogin">
+      退出登录
+    </div>
+  </div>
+</el-dialog>
 </template>
 
 
 <style lang="scss">
-
-
-
 .el-dialog {
  background-color: #102844;
  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.7);
  border-radius: 10px;
  width: 400px;
+ .quit{
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .outlogin{
+    cursor: pointer;
+    color: #c5c2c2;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #FE2C55;
+    border-radius: 8px;
+    &:hover{
+      background-color: #D21B46;
+    }
+    &:active{
+      color: #fff;
+    }
+  }
+ }
 }
 .el-dialog__header{
   cursor: default;

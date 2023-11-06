@@ -13,16 +13,16 @@ const HeaderState= HeaderStateStore()
         <div class="dropdown-content" >
           <!-- 下拉菜单内容 -->
           <div class="dropdown-item up">
-            <div v-if="HeaderState.isLogin">登录后即可充值牛币</div>
-            <div v-else>可充值牛币</div>
+            <div v-if="HeaderState.isLogin">可充值牛币</div>
+            <div v-else>登录后即可充值牛币</div>
           </div>
           <div class="dropdown-item middle">
             <div>1元=10牛币</div>
           </div>
           
           <div class="dropdown-item down" style="background-color:#ff2c55;border-radius: 0 0 10px 10px; ">
-            <div v-if="HeaderState.isLogin">立即登录</div>
-            <div v-else>立即充值</div>
+            <div v-if="HeaderState.isLogin">立即充值</div>
+            <div v-else>立即登录</div>
           </div>
         </div>
         

@@ -1,11 +1,12 @@
 <!-- 上传 -->
 <script setup>
 import {uploadVedioApi} from '@/apis/upload'
+import {HeaderStateStore} from "@/stores/HeaderState.js"
 import * as qiniu from 'qiniu-js'
 import { ElLoading, ElMessage } from 'element-plus'
 import { ref } from "vue";
 
-
+const HeaderState=HeaderStateStore()
 const dialogVisible = ref(false)
 const file = ref(null)
 const fullscreenLoading = ref(false)
@@ -64,6 +65,15 @@ const uploadFile = async() =>{
   observable.subscribe(observer)
 }
 
+const dialogVis = () =>{
+  if(!HeaderState.isLogin){
+    ElMessage('请先登录')
+    return 
+  }
+  dialogVisible.value = true
+
+}
+
 </script>
 
 
@@ -78,7 +88,7 @@ const uploadFile = async() =>{
         <div class="dropdown-content" >
           <!-- 下拉菜单内容 -->
           <div class="dropdown-item">
-            <div class="clickable" @click="dialogVisible = true" >发布视频</div>
+            <div class="clickable" @click="dialogVis()" >发布视频</div>
             <div>视频管理</div>
             <div>作品数据</div>
             <div>直播数据</div>
