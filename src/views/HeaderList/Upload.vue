@@ -19,6 +19,7 @@ const change = () =>{
 }
 // 点击上传视频
 const uploadFile = async() =>{
+  // 没有文件信息的消息提示
   if(!file.value.files.length){
     ElMessage({
       type: 'warning',
@@ -26,6 +27,7 @@ const uploadFile = async() =>{
     })
     return;
   }
+  // 调用上传接口获取七牛云token信息
   const res = await uploadVedioApi()
   let token = res.data
   let files = file.value.files[0]
@@ -38,8 +40,7 @@ const uploadFile = async() =>{
   const observable = qiniu.upload(files, key, token, putExtra, config)
   const observer = {
     next(res){
-      // ...
-      // console.log(res);
+      // 上传时的进度显示 progress
       progress.value = res.total.percent
       progress.value = Math.floor(progress.value)
       fullscreenLoading.value = true 
@@ -48,7 +49,6 @@ const uploadFile = async() =>{
         }
     },
     error(err){
-      // ...
       // console.log(err);
       ElMessage({
         type: 'error',
@@ -56,7 +56,6 @@ const uploadFile = async() =>{
     })
     },
     complete(res){
-      // ...
       // console.log('res');
       ElMessage.success('上传成功')
       dialogVisible.value = false
@@ -65,21 +64,16 @@ const uploadFile = async() =>{
   observable.subscribe(observer)
 }
 
+// 进入上传页面前判断是否登录
 const dialogVis = () =>{
   if(!HeaderState.isLogin){
     ElMessage('请先登录')
     return 
   }
   dialogVisible.value = true
-
 }
 
 </script>
-
-
-
-
-
 <template>
 
   <div class="Client">
@@ -108,7 +102,7 @@ const dialogVis = () =>{
     :show-close="false"
   >
     <div class="upfile">
-      <input type="file" ref="file" @change="change()">
+      <input type="file" ref="file" @change="change()" accept="vedio/mp4">
       <div class="box">
         +
       </div>
@@ -189,46 +183,46 @@ const dialogVis = () =>{
   }
 }
 .dropdown-content {
-        z-index: 999 ;
-        position: absolute;
-        top: 50px;
-        left: -80px;
-        border-left: 10px;
-        min-width: 160px;
-        background-color:#0f2340; 
-        opacity: 0;
-        transition: all 0.2s 0.2s;
-        transform: translateY(-100px) scale(1, 0);
-        border-radius: 10px;
-        .dropdown-item{
-          display: flex;
-          justify-content: center;
-          flex-direction: column;
-          align-items: center;
-          color: #fff;
-          width: 100%;
-          height: 100%;
-          line-height: 50px;
-          border-radius: 10px;
-           .clickable {  
-              cursor: pointer; 
-                }  
+  z-index: 999 ;
+  position: absolute;
+  top: 50px;
+  left: -80px;
+  border-left: 10px;
+  min-width: 160px;
+  background-color:#0f2340; 
+  opacity: 0;
+  transition: all 0.2s 0.2s;
+  transform: translateY(-100px) scale(1, 0);
+  border-radius: 10px;
+  .dropdown-item{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    line-height: 50px;
+    border-radius: 10px;
+    .clickable {  
+        cursor: pointer; 
+    }  
   
 &> div:not(.clickable) {  
   cursor: not-allowed; 
   background-color:#0f2340 !important;
 
 }
-          div{
-            width: 100%;
-            padding-left: 30px;
-            &:hover{
-            background-color: rgba(37, 38, 50);
-            
-          }
-          }
-          
-        }
-      }
+    div{
+      width: 100%;
+      padding-left: 30px;
+      &:hover{
+      background-color: rgba(37, 38, 50);
+      
+    }
+    }
+    
+  }
+}
 </style>
  

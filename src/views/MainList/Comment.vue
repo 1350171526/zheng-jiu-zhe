@@ -1,9 +1,11 @@
+<!-- 评论 -->
 <script setup>
 
 import { inject,ref, watch } from "vue"
 const change = inject('change')
 let number = ref()
 number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
+// 切换视频时通过provide传递参数改变number
 
 watch(change, () => {  
   number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0

@@ -19,6 +19,7 @@ import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
 import { ref,defineEmits  } from "vue"
 const activeindex = ref(0)
+// 侧边导航列表信息
  const State = ref([
   {id:1,name:'首页',icon:'iconfont icon-shouye'},
   {id:2,name:"热门",icon:'iconfont icon-remen'},
@@ -32,7 +33,7 @@ const activeindex = ref(0)
   {id:10,name:"动漫",icon:'iconfont icon-dongman'},
   {id:11,name:"我的",icon:'iconfont icon-wode'},
 ]) 
-
+// 点击子组件触发父组件事件
 const emit = defineEmits(['getVedio','getMusic','getHot'])
 const switchType = (item,index) =>{
   activeindex.value = index

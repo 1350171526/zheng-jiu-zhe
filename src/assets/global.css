@@ -1,3 +1,4 @@
+/* 全局动画样式 */
 @keyframes mymove {
   50%{
     transform-origin: bottom;

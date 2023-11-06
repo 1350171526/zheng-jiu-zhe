@@ -20,7 +20,7 @@ const props = defineProps({
     default: 0
   }
 })
-
+// 子组件触发父组件事件
 const emit = defineEmits(['nextVedio']['lastVedio'])
 const last = () =>{
   emit('lastVedio')
@@ -41,16 +41,13 @@ const findvideocover = () =>{
     const  video = document.getElementById("upvideo"); 
     var canvas = document.getElementById('mycanvas') 
     const ctx = canvas.getContext('2d'); 
-    video.crossOrigin = 'anonymous' // 解决跨域问题，也就是提示污染资源无法转换视频
+    video.crossOrigin = 'anonymous' 
     video.currentTime = 1 // 第一帧
     video.oncanplay = () => {
     canvas.width = video.clientWidth ; // 获取视频宽度
     canvas.height = video.clientHeight ; //获取视频高度
     // 利用canvas对象方法绘图
     ctx.drawImage(video, 0, 0, video.clientWidth,video.clientHeight)
-    // 转换成base64形式
-    // console.log(canvas.toDataURL())
-    // this.videoImg = canvas.toDataURL ("image/png") // 截取后的视频封面
   }
 }
 
@@ -58,7 +55,9 @@ const findvideocover = () =>{
 
 <template>
   <div class="main">
+    <!-- 视频区域 -->
     <div class="video" @mousewheel="mousewheel">
+      <!-- 预加载前一个视频 -->
       <div class="left">
         <video 
           playsinline="true"
@@ -72,6 +71,7 @@ const findvideocover = () =>{
           v-if="props.urlArr"
         ></video>
       </div>
+      <!-- 当前视频 -->
       <div class="left">
         <video 
           id="upvideo"
@@ -96,6 +96,7 @@ const findvideocover = () =>{
         </div>
         <canvas id='mycanvas'></canvas>
       </div>
+      <!-- 预加载后一个视频 -->
       <div class="left">
         <video 
           preload
@@ -110,7 +111,7 @@ const findvideocover = () =>{
         ></video>
       </div>
     </div>
-    
+    <!-- 右侧按钮 -->
     <div class="right">
       <span class="iconfont icon-jiantoushang" @click="last()"></span>
       <span class="iconfont icon-jiantouxia" @click="next()"></span>

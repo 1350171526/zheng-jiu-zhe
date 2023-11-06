@@ -1,7 +1,7 @@
 import { ref,  } from 'vue'
 import { defineStore } from 'pinia'
 
-
+// 用户登录状态
 export const HeaderStateStore = defineStore('HeaderState', () => { 
   const isLogin = ref(false)
   const login = () =>{
@@ -15,8 +15,6 @@ export const HeaderStateStore = defineStore('HeaderState', () => {
     login,
     outLogin
   }
-  
-  
 },
 {
   // 持久化存储

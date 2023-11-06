@@ -8,13 +8,11 @@ const HeaderState=HeaderStateStore()
 
 <template>
   <!-- 登录后显示的页面 -->
-
   <div class="group" v-if="HeaderState.isLogin">
     <div class="share">
       <span class="iconfont icon-tishi"></span>
         <div>通知</div>
     </div>
-    
     <div class="layer">
       <span class="top">
         <span class="iconfont icon-sousuo"></span>
@@ -34,9 +32,9 @@ const HeaderState=HeaderStateStore()
           </div>
         </div>
       </span>
-      
     </div>
   </div>
+  <!-- 未登录的样式 -->
   <div class="Message" v-else>
     <span class="iconfont icon-tishi"></span>
         <div>通知</div>
@@ -50,8 +48,6 @@ const HeaderState=HeaderStateStore()
             <div>立即登录</div>
           </div>
         </div>
-
-  
   </div>
   
 
