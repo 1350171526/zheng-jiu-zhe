@@ -9,6 +9,9 @@ number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 watch(change, () => {  
   number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 }); 
+
+// 页面onMounted时调用接口向后端发送获取好友信息请求 参数（当前用户id）
+// 后端根据当前用户id将当前用户好友表处理后返回前端
 </script>
 
 <template>

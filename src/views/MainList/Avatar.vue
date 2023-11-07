@@ -1,11 +1,15 @@
 <!-- 作者头像 -->
 <script setup>
-
+const homepage = () =>{
+  // 点击作者头像
+  // 1.向后端发送请求（视频作者id）根据作者ID获取作者主页信息
+  // 进入主页根据信息渲染页面
+}
 </script>
 
 <template>
   <div class="group">
-    <text class="iconfont icon-jurassic_user">
+    <text class="iconfont icon-jurassic_user" @click="homepage()">
       <div class="layer">
         <span>进入作者主页</span>
         <span>F</span>

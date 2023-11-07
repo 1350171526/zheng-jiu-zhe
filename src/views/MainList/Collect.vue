@@ -11,7 +11,12 @@ watch(change, () => {
 });  
 
 const isSelect = ref(false)
+// // 前端调用接口获取视频时传递参数（当前用户id，视频id）
+// 后端根据当前视频id在当前用户收藏表中判断是否有此id，返回给前端渲染
 const like = () =>{
+  // 点击收藏向后端发送请求,后端在数据库根据视频id放在当前用户收藏表中
+
+  // 前端无感操作点击收藏修改样式
   if(isSelect.value){
     number.value--
   }else{

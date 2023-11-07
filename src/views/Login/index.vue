@@ -43,6 +43,7 @@ const dialogFormVisible = ref(true)
 //获取form实例统一校验
 const formRef = ref(null); 
 const doLogin = () => {  
+  // 点击登录通过前端表单校验之后向后端发送post请求，后端验证账号密码之返回用户数据和token信息给前端渲染
   formRef.value.validate((valid) => {  
     if (valid) {  
       ElMessage.success('登录成功');  
@@ -92,7 +93,7 @@ center
         
       </el-form-item>
       <el-form-item prop="password" label="密码">
-        <el-input  v-model="form.password" placeholder="请输入密码" />
+        <el-input type="password" v-model="form.password" placeholder="请输入密码" />
       </el-form-item>
       <el-form-item label-width="22px" prop="agree">
         <el-checkbox size="large" v-model="form.agree">

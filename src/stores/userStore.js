@@ -13,6 +13,7 @@ export const useUserStore = defineStore('user', () => {
   // 2. 点击登录通过前端表单验证后调用登录接口向后端传入并验证准确性返回用户信息
   const getUserInfo = async ({ account, password }) => {
     const res = await loginAPI({ account, password })
+    // 后端返回的用户信息应该包含：用户id、用户头像、用户好友信息、用户个性签名、作品数、收藏数、点赞数、等信息
     userInfo.value = res.result
     // 提示用户
     ElMessage({ type: 'success', message: '登录成功' })

@@ -11,11 +11,16 @@ watch(change, () => {
   number.value = Math.floor(Math.random() * (10000 - 0 + 1)) + 0
 }); 
 
+const getComment = () =>{
+  // 点击评论向后端发送评论请求接口，参数（当前用户id，视频id）
+  // 后端在数据库根据视频id将对应的评论发送给前端渲染
+  // 如果在评论表中匹配到当前用户的id则把它放到评论第一位
+}
 </script>
 
 <template>
   <div class="group">
-    <div class="comment">
+    <div class="comment" @click="getComment">
       <text class="iconfont icon-pinglun"></text>
       {{ number }}
     </div>

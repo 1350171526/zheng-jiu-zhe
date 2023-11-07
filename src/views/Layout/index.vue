@@ -9,7 +9,8 @@ import { onMounted, ref, onBeforeUnmount, provide } from 'vue';
 
 const urlArr = ref([])
 let type = ref("total")
-// 获取首页全部视频
+// 获取首页视频
+// 后端返回一组视频的每条视频应该包含视频链接、视频作者id、头像信息、是否被此用户关注点赞或收藏，视频id、点赞数、评论数、收藏数、分享数、等信息
 const getVedio =async () =>{
   type.value = "total"
   const res = await getVedioApi()
